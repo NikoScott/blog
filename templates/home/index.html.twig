@@ -1,9 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Page d'accueil {% endblock %}
+{% block title %}
+	Page d'accueil
+{% endblock %}
 
 {% block body %}
 
-<a href="{{ path ('app_home') }}"> Lien vers la page d'accueil </a>
+	<a href="{{ path ('app_home') }}">
+		Lien vers la page d'accueil
+	</a><br>
+	<a href="{{ path ('app_contact') }}">
+		Lien vers la page contact
+	</a><br>
+	<a href="{{ path ('app_articles') }}">
+		Lien vers la page articles
+	</a><br>
+	{# <a href="{{ path ('app_article') }}"> Lien vers la page article </a> #}
+	<br>
+	<a href="{{ path ('app_whoweare') }}">
+		Lien vers la page qui sommes nous ?
+	</a><br>
 
 {% endblock %}
