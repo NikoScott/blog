@@ -1,9 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Articles{% endblock %}
+{% block title %}Nos articles{% endblock %}
 
 {% block body %}
 
-<a href="{{ path ('app_home') }}"> Lien vers la page d'accueil </a><br>
+    {% for article in listArticles %}
+
+        <div class="mt-3">
+            <img src="{{ article.picture }}" />
+
+            <div>
+                <h2> {{ article.title }} </h2>
+                <p> {{article.chapo }} </p>
+
+            </div>
+        </div>
+
+    {% endfor %}
 
 {% endblock %}

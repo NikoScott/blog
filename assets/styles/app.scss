@@ -1,9 +1,10 @@
 @import "~bootstrap/scss/bootstrap";
 
-.bg-darkGrey {
-    background-color: #101829;
-}
-
-body {
-    position: relative;
-}
+.side-bar {
+    background-color: #f7f7f7;
+    border-right: 1px solid #d7dadb;
+    height: 100%;
+    position: fixed;
+    width: 350px;
+    z-index: 9999999;
+  }
