@@ -1,22 +1,58 @@
 {% extends 'base.html.twig' %}
 
-{% block meta_description %} {{ article.chapo }} {% endblock %}
-{% block title %}{{ article.title }}{% endblock %}
+{% block meta_description %}
+	{{ article.chapo }}
+{% endblock %}
+{% block title %}
+	{{ article.title }}
+{% endblock %}
 
 {% block body %}
 
-    <h1> {{ article.title }} </h1>
-
-    <p> {{ article.catchPhrase }} </p>
-
-    <button class="btn btn-primary"> PARTAGER CET ARTICLE </button>
-
-    <div> {{ article.author }} {{ article.date|date('d-m-Y') }} </div>
-
-    <div>
-        <img src="{{ article.picture }}" alt="{{ article.chapo }}" title="{{ article.chapo }}" />
-        <p> {{ article.legendMainPicture }} </p>
-    </div>
+	<div class="main-content px-5">
 
 
-{% endblock %}
+		<h1>
+			{{ article.title }}
+		</h1>
+
+		<p>
+			{{ article.catchPhrase }}
+		</p>
+
+		<button class="btn btn-primary">
+			PARTAGER CET ARTICLE
+		</button>
+
+		<div>
+			{{ article.author }}
+			{{ article.date|date('d-m-Y') }}
+		</div>
+
+		<div class="articleMain">
+			<img src="{{ asset('build/images/' ~ article.picture ) }}" alt="{{ article.chapo }}" title="{{ article.chapo }}"/>
+			<p>
+				{{ article.legendMainPicture }}
+			</p>
+		</div>
+
+	</div>
+
+	<h2> Articles similaires </h2>
+
+<div class="d-flex">
+	{% for relatedArticle in relatedArticles %}
+
+		<div class="article d-flex my-3">
+			<a class="d-flex text-decoration-none text-reset" href="{{ path('show_article_by_id', { id : relatedArticle.id }) }}">
+				<img src="{{ asset('build/images/' ~ relatedArticle.picture ) }}"/>
+				<div class="d-flex flex-column ps-2">
+					<h2>{{ relatedArticle.title }} - {{ relatedArticle.date|date("d-m-Y") }} </h2>
+					<p>{{ relatedArticle.chapo }}
+					</p>
+				</div>
+			</a>
+		</div>
+{% endfor %}
+</div>
+	{% endblock %}
