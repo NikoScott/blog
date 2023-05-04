@@ -2,9 +2,12 @@
 
 {% block title %}Contact{% endblock %}
 
+{% form_theme contact_form 'bootstrap_5_layout.html.twig' %}
+
 {% block body %}
 
-<a href="{{ path ('app_home') }}"> Lien vers la page d'accueil </a><br>
-
+    <div class="main-content widh:80% p-5">
+    {{ form(contact_form) }}
+    </div>
 
 {% endblock %}
