@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Articles;
+use App\Entity\Category;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,9 +30,14 @@ class ArticlesController extends AbstractController
         // je récupère le paramètre id via l'argument $id
 
         $article = $entityManager->getRepository(Articles::class)->findBy(["id" => $id ])[0];
+        
+        $relatedArticles = $entityManager->getRepository(Articles::class)->findLastThreeRelatedArticles($article->getCategory(), $id);
+
+       
 
         return $this->render('articles/article.html.twig', [
             'article' => $article,
+            'relatedArticles' => $relatedArticles
         ]);
     }
 
@@ -43,9 +49,11 @@ class ArticlesController extends AbstractController
     {
 
         $articles = $entityManager->getRepository(Articles::class)->findBy(["category" => $id ]);
+        $category = $entityManager->getRepository(Category::class)->find($id);
 
         return $this->render('articles/index.html.twig', [
             'listArticles' => $articles,
+            'category' => $category->getName(),
         ]);
     }
 
