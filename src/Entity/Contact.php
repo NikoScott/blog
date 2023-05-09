@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\ContactRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: ContactRepository::class)]
 class Contact
@@ -15,21 +17,38 @@ class Contact
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(
+        message : 'Le prénom ne peut pas être vide'
+    )]
     private ?string $firstName = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(
+        message : 'Le nom ne peut pas être vide'
+    )]
     private ?string $lastName = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Email(
+        message: 'Veuillez renseignez un {{ value }} valide.',
+    )]
     private ?string $email = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+        minMessage: 'Votre message est trop court',
+        maxMessage: 'Votre message est trop long',
+    )]
     private ?string $message = null;
 
     #[ORM\Column(length: 255)]
     private ?string $object = null;
 
     #[ORM\Column(length: 10, nullable: true)]
+    #[Assert\Regex('^(?:(?:+|00)33[\s.-]{0,3}(?:(0)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$^')]
     private ?string $phone = null;
 
     public function getId(): ?int

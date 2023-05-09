@@ -6,7 +6,6 @@ use App\Entity\Contact;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -51,7 +50,7 @@ class ContactType extends AbstractType
                 ]
 
             ])
-            ->add('phone', NumberType::class, [
+            ->add('phone', TextType::class, [
                 'label' => 'Votre numéro de téléphone',
                 'attr' => array(
                     'placeholder' => 'Entrer votre numéro de téléphone'

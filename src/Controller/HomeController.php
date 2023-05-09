@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Articles;
 use App\Entity\Category;
+
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
