@@ -28,11 +28,21 @@
 
 		</div>
 
+        <a href="{{path('ajout_article')}}" class="btn btn-success"> CREER UN NOUVEL ARTICLE </a>
+
 	</div>
 
 	<div class="main-content px-5">
 
 		<div class="inner-content">
+
+	        {# Afficher les messages flash #}
+			{% for notice in app.flashes('confirmation') %}
+				<div class="alert alert-success">
+				{{ notice }}
+				</div>
+			{% endfor %}
+
 			<h1 class="mb-5">
 				Nos derniers articles
 			</h1>
@@ -41,7 +51,7 @@
 
 				<div class="article d-flex my-3">
 					<a class="d-flex text-decoration-none text-reset" href="{{ path('show_article_by_id', { id : article.id }) }}">
-						<img src="{{ asset('build/images/' ~ article.picture ) }}"/>
+						<img src="{{ asset('images/articles/' ~ article.picture ) }}"/>
 						<div class="d-flex flex-column ps-2">
 							<h2>{{ article.title }}
 								-
@@ -60,10 +70,5 @@
 			{{ knp_pagination_render(listArticles) }}
 		</div>
 	</div>
-
-
-	{# Permet de rediriger vers la page d'accueil #}
-	{# <a href="{{ path('app_home') }}"> Lien vers la page d'accueil </a> #}
-
 
 {% endblock %}

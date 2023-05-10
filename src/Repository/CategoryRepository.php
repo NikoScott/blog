@@ -39,20 +39,25 @@ class CategoryRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Category[] Returns an array of Category objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+   /**
+    * @return Category[] Returns an array of Category objects
+    */
+   public function findCategoriesWithArticles(): array
+   {
+
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            "SELECT c FROM App\Entity\Category c
+            WHERE c.id IN (SELECT DISTINCT(a.category) FROM App\Entity\Article a)"
+        );
+
+        return $query->execute();
+
+    }
+   
+
+
 
 //    public function findOneBySomeField($value): ?Category
 //    {
@@ -63,4 +68,5 @@ class CategoryRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
 }
