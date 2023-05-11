@@ -49,7 +49,7 @@ class CategoryRepository extends ServiceEntityRepository
 
         $query = $entityManager->createQuery(
             "SELECT c FROM App\Entity\Category c
-            WHERE c.id IN (SELECT DISTINCT(a.category) FROM App\Entity\Article a)"
+            WHERE c.id IN (SELECT DISTINCT(a.category) FROM App\Entity\Articles a)"
         );
 
         return $query->execute();
