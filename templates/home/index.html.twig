@@ -12,6 +12,9 @@
 
 	<div class="side-bar p-3">
 
+	    <a href="{{path('ajout_article')}}" class="btn btn-success"> CREER UN NOUVEL ARTICLE </a>
+
+
 		<div class="logo"></div>
 		<div class="photo"></div>
 		<div class="list-categories">
@@ -28,7 +31,6 @@
 
 		</div>
 
-        <a href="{{path('ajout_article')}}" class="btn btn-success"> CREER UN NOUVEL ARTICLE </a>
 
 	</div>
 
@@ -53,12 +55,9 @@
 					<a class="d-flex text-decoration-none text-reset" href="{{ path('show_article_by_id', { id : article.id }) }}">
 						<img src="{{ asset('images/articles/' ~ article.picture ) }}"/>
 						<div class="d-flex flex-column ps-2">
-							<h2>{{ article.title }}
-								-
-								{{ article.date|date("d-m-Y") }}
-							</h2>
-							<p>{{ article.chapo }}
-							</p>
+							<h2>{{ article.title }}</h2>
+							<h4>{{ article.chapo }}</h4>
+							<p style="font-size:13px">{{ article.date|date("d-m-Y") }}</p>
 						</div>
 					</a>
 				</div>

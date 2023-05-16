@@ -23,9 +23,11 @@
 
         <p class="mt-5"> {{article.description}} </p>
 
-        <a href="{{path('modify_article', { id : article.id} )}}" class="btn btn-warning"> MODIFIER </a>
-	    <a href="{{path('delete_article', { id : article.id} )}}" class="btn btn-danger"> SUPPRIMER </a>
 
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{path('modify_article', { id : article.id} )}}" class="btn btn-warning"> MODIFIER </a>
+	        <a href="{{path('delete_article', { id : article.id} )}}" class="btn btn-danger"> SUPPRIMER </a>
+        {% endif %}
     </div>
 
     <div class="mt-5 ps-5 mx-auto border">

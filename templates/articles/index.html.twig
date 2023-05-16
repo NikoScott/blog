@@ -14,7 +14,8 @@
                 <a class="d-flex text-decoration-none text-reset" href="{{ path('show_article_by_id', { id : article.id }) }}">
                     <img src="{{ asset('images/articles/' ~ article.picture ) }}" />
                     <div class="d-flex flex-column ps-2">   
-                        <h2>{{ article.title }} - {{ article.date|date("d-m-Y") }} </h2>
+                        <h2>{{ article.title }}</h2>
+                        <h3>{{ article.date|date("d-m-Y") }}</h3>
                         <p>{{ article.chapo }} </p>
                     </div>
                 </a>
