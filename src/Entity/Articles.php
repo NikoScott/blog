@@ -22,7 +22,7 @@ class Articles
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: Types::TEXT)]
     private ?string $catchPhrase = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]

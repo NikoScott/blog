@@ -14,9 +14,6 @@ class Comment
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $idAuthor = null;
-
     #[ORM\Column]
     private ?int $idArticle = null;
 
@@ -36,18 +33,6 @@ class Comment
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdAuthor(): ?string
-    {
-        return $this->idAuthor;
-    }
-
-    public function setIdAuthor(string $idAuthor): self
-    {
-        $this->idAuthor = $idAuthor;
-
-        return $this;
     }
 
     public function getIdArticle(): ?int
