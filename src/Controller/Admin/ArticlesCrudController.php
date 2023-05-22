@@ -33,7 +33,6 @@ class ArticlesCrudController extends AbstractCrudController
     {
         return $filters
             ->add('title')
-            ->add('chapo')
             ->add('date')
             ;
     }
@@ -54,10 +53,8 @@ class ArticlesCrudController extends AbstractCrudController
             ->setUploadedFileNamePattern('[slug]-[contenthash].[extension]')
             ->setRequired(false),
             CollectionField::new('relatedSubjects'),
-            TextField::new('chapo'),
             TextField::new('legendMainPicture'),
             TextField::new('authorWebsite'),
-            NumberField::new('relatedCourse'),
         ];
     }
 

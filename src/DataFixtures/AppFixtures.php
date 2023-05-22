@@ -37,11 +37,9 @@ class AppFixtures extends Fixture
         //         $article->setCategory($category);
         //         $article->setDate($faker->dateTime());
         //         $article->setPicture($faker->imageUrl());
-        //         $article->setRelatedCourse($faker->numberBetween(1, 99));
         //         $article->setTitle($faker->title());
         //         $article->setRelatedSubjects([$faker->word()]);
         //         $article->setLegendMainPicture($faker->text());
-        //         $article->setChapo($faker->text());
         //         $article->setDescription($faker->text());
 
         //         $manager->persist($article); // insère en bdd l'article

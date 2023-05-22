@@ -36,10 +36,8 @@ class ArticlesType extends AbstractType
                 'entry_type' => TextType::class,
                 'allow_add' => true,
             ])
-            ->add('chapo', TextType::class)
             ->add('legendMainPicture', TextType::class)
             ->add('authorWebsite', TextType::class)
-            ->add('relatedCourse', NumberType::class)
             ->add('category')
             ->add('modifier', SubmitType::class, [
                 'attr' => ['class' => 'save btn-primary'],

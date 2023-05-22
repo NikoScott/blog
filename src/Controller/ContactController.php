@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Contact;
 use App\Form\ContactType;
+use App\Service\MailService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,7 +15,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class ContactController extends AbstractController
 {
     #[Route('/contact', name: 'app_contact')]
-    public function index(Request $request, EntityManagerInterface $entityManager, ValidatorInterface $validator): Response
+    public function index(Request $request, EntityManagerInterface $entityManager, MailService $mailService, ValidatorInterface $validator): Response
     {
 
         // créer le formulaire à partir de l'instance de la classe Contact
@@ -25,27 +26,43 @@ class ContactController extends AbstractController
         $form->handleRequest($request);
 
 
-        if ($form->isSubmitted()) {
+        // if ($form->isSubmitted()) {
 
-            $errors = $validator->validate($contact);
+        //     $errors = $validator->validate($contact);
 
-            if (count($errors) > 0) {
+        //     if (count($errors) > 0) {
         
-                return $this->render('contact/index.html.twig', [
-                    'contact_form' => $form,
-                    'errors' => $errors,
-                ]);
-            }
-        }
-        // if ($form->isSubmitted() && $form->isValid()) {
-
-        //     $contact = $form->getData();
-        //     $entityManager->persist($contact);
-        //     $entityManager->flush();
-
-        //     $this->addFlash('confirmation', 'Votre email a bien été envoyé !');
-
+        //         return $this->render('contact/index.html.twig', [
+        //             'contact_form' => $form,
+        //             'errors' => $errors,
+        //         ]);
+        //     }
         // }
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $contact = $form->getData();
+            $entityManager->persist($contact);
+            $entityManager->flush();
+
+            $mailService->sendMail(
+                [
+                'firstName' => $contact->getFirstName(),
+                'name' => $contact->getLastName(),
+                'message' => $contact->getMessage()
+                ],
+                $contact->getEmail(),
+                'Nouveau message !',
+                'contact/email.html.twig'
+            );
+
+            $contact = new Contact();
+            $form = $this->createForm(ContactType::class, $contact);
+
+            $this->addFlash('confirmation', 'Votre email a bien été envoyé !');
+
+        }
 
   
         return $this->render('contact/index.html.twig', [

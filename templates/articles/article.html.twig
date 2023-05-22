@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block meta_description %} {{ article.chapo }} {% endblock %}
+{% block meta_description %} {% endblock %}
 {% block title %}{{ article.title }}{% endblock %}
 
 {% block body %}
@@ -17,7 +17,7 @@
         <div class="mb-3"> {{ article.author }} {{ article.date|date('d-m-Y') }} </div>
 
         <div>
-            <img src="{{ asset('images/articles/' ~ article.picture ) }}" alt="{{ article.chapo }}" title="{{ article.chapo }}" />
+            <img src="{{ asset('images/articles/' ~ article.picture ) }}"/>
             <p> {{ article.legendMainPicture }} </p>
         </div>
 
@@ -41,7 +41,6 @@
                         <img src="{{ asset('images/articles/' ~ relatedArticle.picture ) }}" />
                         <div class="d-flex flex-column ps-2">   
                             <h6>{{ relatedArticle.title }} - {{ relatedArticle.date|date("d-m-Y") }} </h6>
-                            <p>{{ article.chapo }} </p>
                         </div>
                     </a>
                 </div>

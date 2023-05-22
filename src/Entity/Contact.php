@@ -48,7 +48,12 @@ class Contact
     private ?string $object = null;
 
     #[ORM\Column(length: 10, nullable: true)]
-    #[Assert\Regex('^(?:(?:+|00)33[\s.-]{0,3}(?:(0)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$^')]
+    #[Assert\NotBlank(
+        message : 'Le numéro de téléphone ne peut pas être vide'
+    )]
+    #[Assert\Regex('^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$^',
+        message : "Veuillez renseigner un numéro de téléphone français à la sohaib"
+    )]
     private ?string $phone = null;
 
     public function getId(): ?int
