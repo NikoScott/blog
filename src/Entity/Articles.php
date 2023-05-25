@@ -55,7 +55,7 @@ class Articles
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $category = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Comment::class)]
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Comment::class)]
     private Collection $comments;
 
     public function __construct()
@@ -213,7 +213,7 @@ class Articles
     {
         if (!$this->comments->contains($comment)) {
             $this->comments->add($comment);
-            $comment->setUser($this);
+            $comment->setArticle($this);
         }
 
         return $this;
@@ -223,11 +223,17 @@ class Articles
     {
         if ($this->comments->removeElement($comment)) {
             // set the owning side to null (unless already changed)
-            if ($comment->getUser() === $this) {
-                $comment->setUser(null);
+            if ($comment->getArticle() === $this) {
+                $comment->setArticle(null);
             }
         }
 
         return $this;
     }
+
+    public function __toString(){
+        return strtoupper($this->title);
+    }
+
+
 }

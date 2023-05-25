@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Controller\Admin\ArticlesCrudController;
 use App\Entity\Category;
+use App\Entity\Comment;
 use App\Entity\Contact;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 
@@ -49,5 +50,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Nos articles', 'fas fa-list', Articles::class);
         yield MenuItem::linkToCrud('Nos categories', 'fas fa-list', Category::class);
         yield MenuItem::linkToCrud('Nos messages', 'fas fa-list', Contact::class);
+        yield MenuItem::linkToCrud('Commentaires', 'fas fa-list', Comment::class);
     }
 }

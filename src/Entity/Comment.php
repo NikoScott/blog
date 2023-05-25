@@ -14,47 +14,37 @@ class Comment
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $idArticle = null;
+    #[ORM\ManyToOne(inversedBy: 'comments')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Articles $article = null;
 
-    #[ORM\Column(type: Types::TEXT)]
-    private ?string $text = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column]
-    private ?bool $valided = null;
+    private ?bool $approuved = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $comment = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Articles $user = null;
+    private ?User $user = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getIdArticle(): ?int
+    public function getArticle(): ?Articles
     {
-        return $this->idArticle;
+        return $this->article;
     }
 
-    public function setIdArticle(int $idArticle): self
+    public function setArticle(?Articles $article): self
     {
-        $this->idArticle = $idArticle;
-
-        return $this;
-    }
-
-    public function getText(): ?string
-    {
-        return $this->text;
-    }
-
-    public function setText(string $text): self
-    {
-        $this->text = $text;
+        $this->article = $article;
 
         return $this;
     }
@@ -71,24 +61,36 @@ class Comment
         return $this;
     }
 
-    public function isValided(): ?bool
+    public function isApprouved(): ?bool
     {
-        return $this->valided;
+        return $this->approuved;
     }
 
-    public function setValided(bool $valided): self
+    public function setApprouved(bool $approuved): self
     {
-        $this->valided = $valided;
+        $this->approuved = $approuved;
 
         return $this;
     }
 
-    public function getUser(): ?Articles
+    public function getComment(): ?string
+    {
+        return $this->comment;
+    }
+
+    public function setComment(string $comment): self
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
-    public function setUser(?Articles $user): self
+    public function setUser(?User $user): self
     {
         $this->user = $user;
 

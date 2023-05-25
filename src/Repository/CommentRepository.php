@@ -39,6 +39,16 @@ class CommentRepository extends ServiceEntityRepository
         }
     }
 
+    public function findValidComments($article) {
+        
+        return $this->createQueryBuilder('c')
+        ->where('c.article = :idArticle')
+        ->setParameter('idArticle', $article)
+        ->andWhere('c.approuved <> 0')
+        ->getQuery()
+        ->getResult();
+    }
+
 //    /**
 //     * @return Comment[] Returns an array of Comment objects
 //     */

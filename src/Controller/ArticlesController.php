@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Articles;
 use App\Entity\Category;
+use App\Entity\Comment;
 use App\Form\ArticlesType;
+use App\Form\CommentType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
@@ -15,8 +17,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class ArticlesController extends AbstractController
 {
     #[Route('/articles', name: 'app_articles')]
-    public function index(): Response
+    public function index(Request $request): Response
     {
+
         return $this->render('articles/index.html.twig', [
             'controller_name' => 'ArticlesController',
         ]);
@@ -43,7 +46,7 @@ class ArticlesController extends AbstractController
 
     // route multiple
     // je récupère un article
-    #[Route('/article/{id}', name: 'show_article_by_id', requirements: ['id' => '\d+'], methods : ['GET'])]
+    #[Route('/article/{id}', name: 'show_article_by_id', requirements: ['id' => '\d+'])]
     public function showArticle(EntityManagerInterface $entityManager, string $id, Request $request): Response
     {
 
@@ -55,11 +58,36 @@ class ArticlesController extends AbstractController
         
         $relatedArticles = $entityManager->getRepository(Articles::class)->findLastThreeRelatedArticles($article->getCategory(), $id);
 
-       
+        // récupérer les commentaires valides pour cet article
+        $comments = $entityManager->getRepository(Comment::class)->findValidComments($article);
+
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+
+            $comment->setArticle(($article));
+            $comment->setDate(new \DateTime);
+            $comment->setUser($this->getUser());
+            $comment->setApprouved(false);
+
+            $entityManager->persist($comment);
+            $entityManager->flush();
+
+            // réinitialiser le formulaire
+            $comment = new Comment();
+            $form = $this->createForm(CommentType::class, $comment);
+    
+            $this->addFlash('confirmation', 'Votre commentaire sera prochainement validé');
+
+        }
 
         return $this->render('articles/article.html.twig', [
             'article' => $article,
-            'relatedArticles' => $relatedArticles
+            'relatedArticles' => $relatedArticles,
+            'form_comment' => $form,
+            'comments' => $comments
         ]);
     }
 

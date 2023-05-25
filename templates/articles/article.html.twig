@@ -3,9 +3,18 @@
 {% block meta_description %} {% endblock %}
 {% block title %}{{ article.title }}{% endblock %}
 
+{% form_theme form_comment 'bootstrap_5_layout.html.twig' %}
+
 {% block body %}
 
     <div class="mt-5 pt-5 px-5 d-flex flex-column align-items-center">
+
+    {# Afficher les msg flash#}
+    {% for msg in app.flashes('confirmation') %}
+        <div class="alert alert-success">
+            {{ msg }}
+        </div>
+    {% endfor %}
 
         <h1 class="mb-3"> {{ article.title }} </h1>
 
@@ -28,6 +37,27 @@
             <a href="{{path('modify_article', { id : article.id} )}}" class="btn btn-warning"> MODIFIER </a>
 	        <a href="{{path('delete_article', { id : article.id} )}}" class="btn btn-danger"> SUPPRIMER </a>
         {% endif %}
+
+        
+        {% for comment in comments %}
+            <div class="mt-5 ps-5 col-8 mx-auto border">
+                
+                <p class="fw-bold">{{ comment.date|date("d-m-Y") }}
+                {{ comment.user.firstName }}
+                {{ comment.user.lastName }}</p>
+
+                <p class="font-weight-light">{{ comment.comment }}</p>
+            </div>
+
+        {% endfor %}
+
+        {% if app.user %}
+        <div class="col-8">
+                {{ form(form_comment) }}
+        </div>
+
+        {% endif %}
+
     </div>
 
     <div class="mt-5 ps-5 mx-auto border">
@@ -45,8 +75,12 @@
                     </a>
                 </div>
 
+
             {% endfor %}   
+
+
         </div>
+    
     </div>
 
 {% endblock %}
