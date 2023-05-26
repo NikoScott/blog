@@ -2,6 +2,9 @@
 
 
 // Common css
+.custom-shadow {
+    box-shadow: 0 0.3rem 0.3rem 0 rgba(255, 255, 255, 0.20) !important;
+}
 
 ul {
     list-style-type: none;
@@ -43,9 +46,9 @@ a {
 .article {
 
     img {
-        width: 250px;
-        height: 150px;
-        border: 1px solid;
+        width: 300px;
+        border-radius: 10px;
+        height: max-content;
     }
 
 }
@@ -54,7 +57,54 @@ a {
     img {
         width: 700px;
         height: 450px;
-        border: 1px solid;
     }
 
+}
+
+
+/// MEDIA QUERY 
+
+@media only screen and (max-width: 480px) {
+    /* Styles spécifiques pour les téléphones mobiles */
+  
+    body {
+      font-size: 16px;
+      line-height: 1.5;
+      padding: 10px;
+    }
+  
+
+    /* Ajustements pour les éléments spécifiques */
+    .header {
+      padding: 20px;
+    }
+  
+    .main-content {
+      margin: 10px;
+    }
+  
+    .footer {
+      padding: 20px;
+    }
+  }
+  
+
+  
+@media only screen and (device-width: 375px) and (device-height: 812px) and (orientation: portrait) {
+/* Styles spécifiques pour les iPhones en mode portrait */
+}
+
+
+@media only screen and (device-width: 360px) and (device-height: 640px) and (orientation: landscape) {
+/* Styles spécifiques pour les téléphones Android en mode paysage */
+}
+
+
+@media only screen and (max-width: 600px) {
+/* Styles spécifiques pour les téléphones avec une largeur d'écran maximale de 600px */
+}
+
+
+@media only screen and (max-width: 1280px) and (max-height: 720px) {
+/* Styles spécifiques pour les téléphones avec une résolution d'écran maximale de 720p */
 }

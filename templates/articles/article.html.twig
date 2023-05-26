@@ -16,27 +16,30 @@
         </div>
     {% endfor %}
 
-        <h1 class="mb-3"> {{ article.title }} </h1>
+    {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{path('modify_article', { id : article.id} )}}" class="btn btn-warning"> MODIFIER </a>
+    <a href="{{path('delete_article', { id : article.id} )}}" class="btn btn-danger"> SUPPRIMER </a>
+    {% endif %}
+
+        <h1 class="mb-3 text-center"> {{ article.title | raw}} </h1>
+
+        <button class="btn btn-primary mb-3"> PARTAGER CET ARTICLE </button>
 
         <p class="mb-3"> {{ article.catchPhrase }} </p>
         
-        <button class="btn btn-primary mb-3"> PARTAGER CET ARTICLE </button>
-
-        {# directive twig : petite fonctionalité twig qui permet de parser une date #}
-        <div class="mb-3"> {{ article.author }} {{ article.date|date('d-m-Y') }} </div>
-
         <div>
             <img src="{{ asset('images/articles/' ~ article.picture ) }}"/>
-            <p> {{ article.legendMainPicture }} </p>
+
         </div>
 
-        <p class="mt-5"> {{article.description}} </p>
+        <div class="mt-5 fw-light"> {{article.description | raw}} </div>
+
+        {# directive twig : petite fonctionalité twig qui permet de parser une date #}
+        <p class="mb-3 text-right fst-italic"> {{ article.author }} {{ article.date|date('d-m-Y') }} </p>
+
+        <div class="separator mt-5" style="height:2px; background:rgba(255,255,255, 0.05)"> </div>
 
 
-        {% if is_granted('ROLE_ADMIN') %}
-            <a href="{{path('modify_article', { id : article.id} )}}" class="btn btn-warning"> MODIFIER </a>
-	        <a href="{{path('delete_article', { id : article.id} )}}" class="btn btn-danger"> SUPPRIMER </a>
-        {% endif %}
 
         
         {% for comment in comments %}
