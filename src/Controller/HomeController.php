@@ -25,7 +25,7 @@ class HomeController extends AbstractController
 
         // j'ai récupéré le repository de la classe Articles
         // et j'ai appelé la méthode findAll()
-        $articles = $entityManager->getRepository(Articles::class)->findAll();
+        $articles = $entityManager->getRepository(Articles::class)->findBy([], ['date' => 'DESC']);
 
         // $categories = $entityManager->getRepository(Category::class)->findAll();
         $categories = $entityManager->getRepository(Category::class)->findCategoriesWithArticles();

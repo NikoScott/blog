@@ -98,7 +98,7 @@ class ArticlesController extends AbstractController
     public function showArticlesByCategory(EntityManagerInterface $entityManager, string $id): Response
     {
 
-        $articles = $entityManager->getRepository(Articles::class)->findBy(["category" => $id ]);
+        $articles = $entityManager->getRepository(Articles::class)->findBy(["category" => $id ], ['date' => 'DESC']);
         $category = $entityManager->getRepository(Category::class)->find($id);
 
         return $this->render('articles/index.html.twig', [

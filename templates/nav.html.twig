@@ -1,27 +1,31 @@
-<ul class="nav justify-content-end bg-primary align-items-center px-5" id="main-nav">
+<ul class="nav custom-shadow justify-content-end bg-primary-subtle align-items-center px-5" id="main-nav">
             <li class="nav-item">
-                <a class="nav-link active text-light" aria-current="page" href="{{ path('app_home')}}"> Accueil </a>
+                <a class="nav-link active text-primary" aria-current="page" href="{{ path('app_home')}}"> Accueil </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active text-light" aria-current="page" href="{{ path('app_whoweare')}}"> Qui sommes nous ? </a>
+                <a class="nav-link active text-primary" aria-current="page" href="{{ path('app_whoweare')}}"> Qui sommes nous ? </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active text-light" aria-current="page" href="{{ path('app_contact')}}"> Contact </a>
-            </li>            
+                <a class="nav-link active text-primary" aria-current="page" href="{{ path('app_contact')}}"> Contact </a>
+            </li>  
+            
+            {% if is_granted('ROLE_ADMIN') %}      
+            <a href="{{path('ajout_article')}}" class="btn btn-primary"> Creer un nouvel article </a>
+            {% endif %}
 
             {% if app.user %}
             <li class="nav-item">
-                <a class="nav-link active text-light" aria-current="page" href="{{ path('app_profile')}}"> Profile </a>
+                <a class="nav-link active text-primary" aria-current="page" href="{{ path('app_profile')}}"> Profile </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active text-light" aria-current="page" href="{{ path('app_logout')}}"> Déconnexion </a>
+                <a class="nav-link active text-primary" aria-current="page" href="{{ path('app_logout')}}"> Déconnexion </a>
             </li>
             {% else %}
             <li class="nav-item">
-                <a class="nav-link active text-light" aria-current="page" href="{{ path('app_login')}}"> Connexion </a>
+                <a class="nav-link active text-primary" aria-current="page" href="{{ path('app_login')}}"> Connexion </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active text-light" aria-current="page" href="{{ path('app_register')}}"> Inscription </a>
+                <a class="nav-link active text-primary" aria-current="page" href="{{ path('app_register')}}"> Inscription </a>
             </li>
             {% endif %}
         </ul>

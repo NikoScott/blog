@@ -8,19 +8,19 @@
 
 {% block body %}
 
-	<div class="side-bar p-3">
-
-	    <a href="{{path('ajout_article')}}" class="btn btn-success"> CREER UN NOUVEL ARTICLE </a>
-
-
+	<div class="side-bar custom-shadow mt-1 p-1">
+	    
 		<div class="logo"></div>
 		<div class="photo"></div>
 		<div class="list-categories">
 
 			<ul>
+				<li>
+					<a href="{{path('ajout_category')}}" class="btn btn-primary"> Creer une nouvelle catégorie </a>
+				</li>
 				{% for category in listCategories %}
 					<li class="my-3">
-						<a href="{{ path('show_articles_by_category', {id : category.id}) }}">
+						<a class="text-primary" href="{{ path('show_articles_by_category', {id : category.id}) }}">
 							{{category.name}}
 						</a>
 					</li>
@@ -28,9 +28,8 @@
 			</ul>
 
 		</div>
-
-
 	</div>
+
 
 	<div class="main-content px-5">
 
@@ -43,7 +42,7 @@
 				</div>
 			{% endfor %}
 
-			<h1 class="mb-5">
+			<h1 class="mb-5 text-primary">
 				Nos derniers articles
 			</h1>
 
@@ -52,9 +51,10 @@
 				<div class="article d-flex my-3 cursor-pointer">
 					<a class="d-flex text-decoration-none text-reset" href="{{ path('show_article_by_id', { id : article.id }) }}">
 						<img class="custom-shadow" src="{{ asset('images/articles/' ~ article.picture ) }}"/>
+						<div class="ms-4 "></div>
 						<div class="d-flex flex-column ps-2">
-							<h3>{{ article.title | raw}}</h3>
-							<p class="mb-3"> {{ article.catchPhrase }} </p>
+							<h3 class="text-primary-emphasis">{{ article.title | raw}}</h3>
+							<p class="mb-3 text-body-secondary"> {{ article.catchPhrase }} </p>
 							<p style="font-size:13px">{{ article.date|date("d-m-Y") }}</p>
 						</div>
 					</a>

@@ -2,6 +2,7 @@
 <html lang="fr" data-bs-theme="dark">
     <head>
         <meta charset="UTF-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta name="description" content="{% block meta_description %} {% endblock %}" />
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
@@ -14,7 +15,7 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
-    <body class="bg-dark text-light">
+    <body class="bg-primary-subtle text-light">
 
         {% include 'nav.html.twig' %}
 

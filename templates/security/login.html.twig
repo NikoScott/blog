@@ -6,6 +6,13 @@
 
 <div class="mt-5 p-5">
 
+    {# Afficher les messages flash #}
+    {% for notice in app.flashes('confirmation') %}
+        <div class="alert alert-success">
+        {{ notice }}
+        </div>
+    {% endfor %}
+
     <form method="post">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>

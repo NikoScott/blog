@@ -17,8 +17,8 @@
     {% endfor %}
 
     {% if is_granted('ROLE_ADMIN') %}
-    <a href="{{path('modify_article', { id : article.id} )}}" class="btn btn-warning"> MODIFIER </a>
-    <a href="{{path('delete_article', { id : article.id} )}}" class="btn btn-danger"> SUPPRIMER </a>
+    <a href="{{path('modify_article', { id : article.id} )}}" class="btn btn-warning"> Modifier </a>
+    <a href="{{path('delete_article', { id : article.id} )}}" class="btn btn-danger"> Supprimer </a>
     {% endif %}
 
         <h1 class="mb-3 text-center"> {{ article.title | raw}} </h1>
@@ -27,8 +27,8 @@
 
         <p class="mb-3"> {{ article.catchPhrase }} </p>
         
-        <div>
-            <img src="{{ asset('images/articles/' ~ article.picture ) }}"/>
+        <div class="articleMain">
+            <img class="custom-shadow" src="{{ asset('images/articles/' ~ article.picture ) }}" alt="photo {{ article.category }}"/>
 
         </div>
 
@@ -53,6 +53,8 @@
             </div>
 
         {% endfor %}
+
+        <div class="separator mt-5 mb-5" style="height:2px;background:rgba(255,255,255, 0.05);"> </div>
 
         {% if app.user %}
         <div class="col-8">
