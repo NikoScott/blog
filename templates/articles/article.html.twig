@@ -1,91 +1,121 @@
 {% extends 'base.html.twig' %}
 
-{% block meta_description %} {% endblock %}
-{% block title %}{{ article.title }}{% endblock %}
+{% block meta_description %}{% endblock %}
+{% block title %}
+	{{ article.title }}
+{% endblock %}
 
 {% form_theme form_comment 'bootstrap_5_layout.html.twig' %}
 
 {% block body %}
 
-    <div class="mt-5 pt-5 px-5 d-flex flex-column align-items-center">
+	<div
+		class="mt-5 pt-5 px-5 d-flex flex-column align-items-center text-body-secondary">
 
-    {# Afficher les msg flash#}
-    {% for msg in app.flashes('confirmation') %}
-        <div class="alert alert-success">
-            {{ msg }}
-        </div>
-    {% endfor %}
+		{# Afficher les msg flash#}
+		{% for msg in app.flashes('confirmation') %}
+			<div class="alert alert-success">
+				{{ msg }}
+			</div>
+		{% endfor %}
 
-    {% if is_granted('ROLE_ADMIN') %}
-    <a href="{{path('modify_article', { id : article.id} )}}" class="btn btn-warning"> Modifier </a>
-    <a href="{{path('delete_article', { id : article.id} )}}" class="btn btn-danger"> Supprimer </a>
-    {% endif %}
+		<h1 class="mb-3 text-center">
+			{{ article.title}}
+		</h1>
 
-        <h1 class="mb-3 text-center"> {{ article.title | raw}} </h1>
+		<button class="btn btn-primary mb-3">
+			PARTAGER CET ARTICLE
+		</button>
 
-        <button class="btn btn-primary mb-3"> PARTAGER CET ARTICLE </button>
+		<p class="mb-3">
+			{{ article.catchPhrase }}
+		</p>
 
-        <p class="mb-3"> {{ article.catchPhrase }} </p>
-        
-        <div class="articleMain">
-            <img class="custom-shadow" src="{{ asset('images/articles/' ~ article.picture ) }}" alt="photo {{ article.category }}"/>
-
-        </div>
-
-        <div class="mt-5 fw-light"> {{article.description | raw}} </div>
-
-        {# directive twig : petite fonctionalité twig qui permet de parser une date #}
-        <p class="mb-3 text-right fst-italic"> {{ article.author }} {{ article.date|date('d-m-Y') }} </p>
-
-        <div class="separator mt-5" style="height:2px; background:rgba(255,255,255, 0.05)"> </div>
-
-
-
-        
-        {% for comment in comments %}
-            <div class="mt-5 ps-5 col-8 mx-auto border">
-                
-                <p class="fw-bold">{{ comment.date|date("d-m-Y") }}
-                {{ comment.user.firstName }}
-                {{ comment.user.lastName }}</p>
-
-                <p class="font-weight-light">{{ comment.comment }}</p>
-            </div>
-
-        {% endfor %}
-
-        <div class="separator mt-5 mb-5" style="height:2px;background:rgba(255,255,255, 0.05);"> </div>
-
-        {% if app.user %}
-        <div class="col-8">
-                {{ form(form_comment) }}
+		<div class="articleMain">
+			<img class="custom-shadow" src="{{ asset('images/articles/' ~ article.picture ) }}" alt="photo {{ article.category }}"/>
+		</div>
+        <div class="mt-4">
+        {% if is_granted('ROLE_ADMIN') %}
+			<a href="{{path('modify_article', { id : article.id} )}}" class="btn btn-warning">
+				Modifier
+			</a>
+			<a href="{{path('delete_article', { id : article.id} )}}" class="btn btn-danger">
+				Supprimer
+			</a>
+		{% endif %}
         </div>
 
-        {% endif %}
+		<div class="mt-5" style="width:80%">
+			{{article.description | raw}}
+		</div>
 
-    </div>
+		{# directive twig : petite fonctionalité twig qui permet de parser une date #}
+		<p class="mb-3 text-end fst-italic">
+			{{ article.author }}, le {{ article.date|date('d-m-Y') }}
+		</p>
 
-    <div class="mt-5 ps-5 mx-auto border">
-        <h2> Articles similaires </h2>
+		<div class="separator mt-5" style="width:30%; height:1px; background:rgba(173,173,173,1)"></div>
 
-        <div class="d-flex border">
-            {% for relatedArticle in relatedArticles %} 
+{# 
+COMMENTAIRES 
+#}
+		{% for comment in comments %}
+			<div class="mt-5 p-2 col-8 mx-auto custom-shadow" style="border-radius:10px">
 
-                <div class="article d-flex my-3 border mx-auto">
-                    <a class="d-flex text-decoration-none text-reset" href="{{ path('show_article_by_id', { id : relatedArticle.id }) }}">
-                        <img src="{{ asset('images/articles/' ~ relatedArticle.picture ) }}" />
-                        <div class="d-flex flex-column ps-2">   
-                            <h6>{{ relatedArticle.title }} - {{ relatedArticle.date|date("d-m-Y") }} </h6>
-                        </div>
-                    </a>
-                </div>
+				<p class="fst-italic">{{ comment.date|date("d-m-Y") }} de {{ comment.user.firstName }} {{ comment.user.lastName }}</p>
 
+				<p class="ms-5 font-weight-light">{{ comment.comment }}</p>
+			</div>
+			<div class="separator mt-5" style="width:30%; height:1px; background:rgba(173,173,173,1)"></div>
 
-            {% endfor %}   
+		{% endfor %}
 
 
-        </div>
-    
-    </div>
+		{% if app.user %}
+			<div class="col-8 mt-5">
+				{{ form(form_comment) }}
+				</div>
 
-{% endblock %}
+			{% endif %}
+
+		</div>
+
+{# 
+ARTICLES SIMILAIRES
+ #}
+
+		{% for relatedArticle in relatedArticles %}
+			<div class="separator mx-auto mt-5 mb-5" style="width:50%; height:1px; background:rgba(173,173,173,1)"></div>
+
+			<div class="mx-auto mb-5 d-flex flex-column align-items-center" style="width:80%">
+				<h2 class="mb-3 text-center text-body-secondary">
+					Articles similaires
+				</h2>
+
+				<a href="#">
+					<div class="card custom-shadow" style="width:18rem;">
+						<img src="{{ asset('images/articles/' ~ relatedArticle.picture ) }}" style="width:100%;"/>
+						<div class="card-body">
+							<h5 class="card-title">{{ relatedArticle.title }}</h5>
+							<p class="card-text"></p>
+						</a>
+					</div>
+			</div>
+
+		{% endfor %}
+
+		</div>
+
+
+
+{# 
+FOOTER
+ #}
+
+	    {# <div class="separator mx-auto mt-5 mb-5" style="width:50%; height:1px; background:rgba(173,173,173,1)"></div>
+        <div class="text-center text-body-secondary fst-italic">
+            <p> Site entièrement codé par <a href="https://nicolaspereire.fr">Nicolas PEREIRE</a> </p>
+            <p></p>
+        </div> #}
+
+	{% endblock %}

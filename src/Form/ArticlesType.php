@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Articles;
+use App\Entity\Category;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -21,7 +23,8 @@ class ArticlesType extends AbstractType
         $builder
             ->add('title', TextType::class)
             ->add('catchPhrase', TextType::class)
-            ->add('date', DateType::class)
+            ->add('date', DateType::class, [
+                'data' => new \DateTime()])
             ->add('author', TextType::class)
             ->add('description', TextType::class)
             ->add('posterFile', FileType::class, array(
@@ -38,7 +41,16 @@ class ArticlesType extends AbstractType
             ])
             ->add('legendMainPicture', TextType::class)
             ->add('authorWebsite', TextType::class)
-            ->add('category')
+            ->add('description', TextType::class)
+            ->add('newCategory', TextType::class, array(
+                'required' => false,
+                'mapped' => false, // n'est pas lié à une colonne en BDD
+                'row_attr' => ['class' => 'show_category d-none']
+            ))
+            ->add('category', EntityType::class, [
+                'placeholder' => '--',
+                'class' => Category::class,
+            ])
             ->add('modifier', SubmitType::class, [
                 'attr' => ['class' => 'save btn-primary'],
             ]);

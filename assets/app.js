@@ -18,3 +18,7 @@ import $ from 'jquery';
 // ./ (or ../) means to look for a local file
 //import greet from '../greet';
 
+$("#newCategory").click(function(e) {
+    e.preventDefault();
+    $('.show_category').toggleClass('d-none');
+});

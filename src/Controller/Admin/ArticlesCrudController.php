@@ -3,13 +3,16 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Articles;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class ArticlesCrudController extends AbstractCrudController
@@ -35,6 +38,13 @@ class ArticlesCrudController extends AbstractCrudController
             ;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+
+            ->addFormTheme('@FOSCKEditor/Form/ckeditor_widget.html.twig');
+    }
+
 
     public function configureFields(string $pageName): iterable
     {
@@ -43,7 +53,8 @@ class ArticlesCrudController extends AbstractCrudController
             TextField::new('catchPhrase'),
             DateField::new('date'),
             TextField::new('author'),
-            TextField::new('description'),
+            TextareaField::new('description')
+                ->setFormType(CKEditorType::class), 
             AssociationField::new('category'),
             ImageField::new('picture')
             ->setUploadDir('public/images/articles')

@@ -22,6 +22,7 @@ class CommentType extends AbstractType
             // ->add('isValid', IntegerType::class, [
             // ])
             ->add('comment', TextareaType::class, [
+                'label' => 'Commentaire :',
                 'attr' => ['class' => 'text-grey'],
             ])
             // ->add('article', NumberType::class, [
