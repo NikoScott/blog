@@ -38,32 +38,32 @@ class ArticlesCrudController extends AbstractCrudController
             ;
     }
 
-    public function configureCrud(Crud $crud): Crud
-    {
-        return $crud
+    // public function configureCrud(Crud $crud): Crud
+    // {
+    //     return $crud
 
-            ->addFormTheme('@FOSCKEditor/Form/ckeditor_widget.html.twig');
-    }
-
-
+    //         ->addFormTheme('@FOSCKEditor/Form/ckeditor_widget.html.twig');
+    // }
+           
+ 
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('title'),
-            TextField::new('catchPhrase'),
+            TextField::new('title','Titre'),
+            TextField::new('catchPhrase',"Phrase d'accroche"),
             DateField::new('date'),
-            TextField::new('author'),
-            TextareaField::new('description')
+            TextField::new('author','Auteur'),
+            TextareaField::new('description','Description')
                 ->setFormType(CKEditorType::class), 
-            AssociationField::new('category'),
-            ImageField::new('picture')
-            ->setUploadDir('public/images/articles')
-            ->setBasePath($this->params->get('app.path.article_images'))
-            ->setUploadedFileNamePattern('[slug]-[contenthash].[extension]')
-            ->setRequired(false),
-            CollectionField::new('relatedSubjects'),
-            TextField::new('legendMainPicture'),
-            TextField::new('authorWebsite'),
+            AssociationField::new('category','Catégorie'),
+            ImageField::new('picture','Photo')
+                ->setUploadDir('public/images/articles')
+                ->setBasePath($this->params->get('app.path.article_images'))
+                ->setUploadedFileNamePattern('[slug]-[contenthash].[extension]')
+                ->setRequired(false),
+            CollectionField::new('relatedSubjects','Hashtag/Sujet'),
+            TextField::new('legendMainPicture','Légende de la photo'),
+            TextField::new('authorWebsite',"Site de l'auteur"),
         ];
     }
 

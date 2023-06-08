@@ -155,7 +155,22 @@ class ArticlesController extends AbstractController
         $form->handleRequest($request);
     
             if($form->isSubmitted() && $form->isValid()) {
+
+                // si j'ai une categorie nouvel dans le formulaire je la set en BDD
+
+                if(!is_null($form->get('newCategory')->getData()) && !empty($form->get('newCategory')->getData())) {
+
+                    $category = new Category();
+                    $category->setName($form->get('newCategory')->getData());
+                    $category->setDescription("");
+
+                    $entityManager->persist($category);
+                    $article->setCategory($category);
+                }
   
+
+                // sinon je choisis dans la liste donc dessous
+
                 if($file = $article->getPosterFile()) {
                 $fileName = md5(uniqid()) . '.' . $file->guessExtension();
                 $file->move('./images/articles', $fileName);
