@@ -10,9 +10,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class ArticlesCrudController extends AbstractCrudController
@@ -35,16 +34,11 @@ class ArticlesCrudController extends AbstractCrudController
         return $filters
             ->add('title')
             ->add('date')
+            ->add('category')
+            ->add('authorWebsite')
             ;
     }
-
-    // public function configureCrud(Crud $crud): Crud
-    // {
-    //     return $crud
-
-    //         ->addFormTheme('@FOSCKEditor/Form/ckeditor_widget.html.twig');
-    // }
-           
+       
  
     public function configureFields(string $pageName): iterable
     {
@@ -53,18 +47,16 @@ class ArticlesCrudController extends AbstractCrudController
             TextField::new('catchPhrase',"Phrase d'accroche"),
             DateField::new('date'),
             TextField::new('author','Auteur'),
-            TextareaField::new('description','Description')
-                ->setFormType(CKEditorType::class), 
-            AssociationField::new('category','Catégorie'),
+            TextEditorField::new('description','Description'),
             ImageField::new('picture','Photo')
-                ->setUploadDir('public/images/articles')
-                ->setBasePath($this->params->get('app.path.article_images'))
-                ->setUploadedFileNamePattern('[slug]-[contenthash].[extension]')
-                ->setRequired(false),
-            CollectionField::new('relatedSubjects','Hashtag/Sujet'),
+            ->setUploadDir('public/images/articles')
+            ->setBasePath($this->params->get('app.path.article_images'))
+            ->setUploadedFileNamePattern('[slug]-[contenthash].[extension]')
+            ->setRequired(false),
             TextField::new('legendMainPicture','Légende de la photo'),
             TextField::new('authorWebsite',"Site de l'auteur"),
+            AssociationField::new('category','Catégorie'),
+            CollectionField::new('relatedSubjects','Hashtag/Sujet'),
         ];
     }
-
 }

@@ -9,8 +9,7 @@
 
 {% block body %}
 
-	<div
-		class="mt-5 pt-5 px-5 d-flex flex-column align-items-center text-body-secondary">
+	<div class="mt-5 pt-5 px-5 d-flex flex-column align-items-center text-body-secondary">
 
 		{# Afficher les msg flash#}
 		{% for msg in app.flashes('confirmation') %}
@@ -19,21 +18,38 @@
 			</div>
 		{% endfor %}
 
-		<h1 class="mb-3 text-center">
+		<h1 class="mt-5 mb-5 text-center">
 			{{ article.title}}
 		</h1>
 
-		<button class="btn btn-primary mb-3">
-			PARTAGER CET ARTICLE
-		</button>
+		<div class="text-center" style="width:50%"> 
+			<p class="mb-3"> {{ article.catchPhrase }} </p>
+		</div>
 
-		<p class="mb-3">
-			{{ article.catchPhrase }}
-		</p>
-
-		<div class="articleMain">
+		<div class="articleMain mb-3">
 			<img class="custom-shadow" src="{{ asset('images/articles/' ~ article.picture ) }}" alt="photo {{ article.category }}"/>
 		</div>
+
+{# 
+RESEAUX SOCIAUX
+ #}
+		<p class="mt-3 text-body-secondary separator"> Partager cet article </p>
+		{# <div class="d-flex"> #}
+			<ul>
+				<a href="http://www.facebook.com/sharer.php?u={{ app.request.uri }}&t={{ article.title}}" onclick="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;">
+				<img src="{{ asset('build/images/fb_logo.png') }}" alt="fb_logo" class="social mb-3">
+				</a>
+				<a href="https://twitter.com/share?url={{ app.request.uri }}&t={{ article.title}}" onclick="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;">
+				<img src="{{ asset('build/images/twitter_logo.png') }}" alt="twitter_logo" class="social mb-3">
+				</a>
+				<a href="https://www.linkedin.com/shareArticle?mini=true&url={{ app.request.uri }}&t={{ article.title}}" onclick="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;">
+				<img src="{{ asset('build/images/linkedin_logo.png') }}" alt="linkedin_logo" class="social mb-3">
+				</a>
+			</ul>
+		{# </div> #}
+
+{# SEULEMENT POUR ADMIN #}
+
         <div class="mt-4">
         {% if is_granted('ROLE_ADMIN') %}
 			<a href="{{path('modify_article', { id : article.id} )}}" class="btn btn-warning">
@@ -44,6 +60,7 @@
 			</a>
 		{% endif %}
         </div>
+
 
 		<div class="mt-5" style="width:80%">
 			{{article.description | raw}}
@@ -105,17 +122,5 @@ ARTICLES SIMILAIRES
 		{% endfor %}
 
 		</div>
-
-
-
-{# 
-FOOTER
- #}
-
-	    {# <div class="separator mx-auto mt-5 mb-5" style="width:50%; height:1px; background:rgba(173,173,173,1)"></div>
-        <div class="text-center text-body-secondary fst-italic">
-            <p> Site entièrement codé par <a href="https://nicolaspereire.fr">Nicolas PEREIRE</a> </p>
-            <p></p>
-        </div> #}
 
 	{% endblock %}
