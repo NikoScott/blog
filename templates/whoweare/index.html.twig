@@ -1,12 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Qui sommes nous ?
-{% endblock %}
+{% block title %} Qui sommes nous ? {% endblock %}
 
 {% block body %}
 
-	<a href="{{ path ('app_home') }}">
-		Lien vers la page d'accueil
-	</a><br>
+<div id="whowearebody" class="mx-auto text-body-secondary" style="width:75%;">
+	<h1 class="text-center mb-4" > Bienvenue sur notre blog !</h1>
+
+	<h2 class="text-center mb-3"> Permettez-moi de vous présenter l'équipe incroyable derrière tout cela.</h2>
+
+	<a class="d-flex justify-content-center mt-5 mb-5" href="https://nicolaspereire.fr" target="_blank">
+	<img src="{{ asset('build/images/profile.jpg') }}" style="width:250px; border-radius:100%;" alt="profile">
+	</a>
+
+	<p class="mb-3">Je suis Nicolas PEREIRE, un développeur web passionné de 33 ans. Avec mes compétences techniques et ma créativité débordante, je suis ici pour transformer des lignes de code en véritables chefs-d'œuvre numériques. Que ce soit pour créer des sites web attrayants ou des applications innovantes, je suis toujours prêt à relever de nouveaux défis.</p>
+	
+	<p class="mb-3">En tant que responsable de l'équipe IT, je mets mes compétences de programmation et ma connaissance approfondie des technologies au service de notre blog. Je suis constamment à l'affût des dernières tendances et des avancées technologiques pour vous offrir des articles informatifs et pertinents.</p>
+
+	<p class="mb-3">Mais mon rôle ne s'arrête pas là ! Je suis également responsable du design et de l'ergonomie de notre blog. Je m'assure que chaque élément graphique et chaque interaction sont aussi agréables que possible pour vous, nos lecteurs.</p>
+
+	<p class="mb-3">En dehors du développement web, je suis également un passionné de sport. Lorsque je ne suis pas en train de jongler avec des langages de programmation, vous me trouverez probablement en train de courir sur les sentiers, de jouer au basket ou de faire du padel. Après tout, être actif est essentiel pour garder un esprit vif et une créativité débordante.</p>
+
+	<p class="mb-3">Maintenant, permettez-moi de vous parler des autres membres de notre équipe. Ils peuvent être un peu timides pour se présenter eux-mêmes, mais leur dévouement et leur expertise sont ce qui rend ce projet si spécial.</p>
+
+	<p class="mb-3">Il y a Niko, Nicolas ou encore M PEREIRE !</p>
+
+	<p class="mb-3">Effectivement, j'ai créé ce blog pour partager avec vous ma passion pour le développement web, les dernières tendances technologiques et bien d'autres sujets passionnants. Mon objectif est de vous fournir des articles informatifs, des tutoriels pratiques et des conseils utiles qui vous aideront à explorer et à maîtriser le monde de la programmation.</p>
+
+	<p class="mb-3">Mais attention, cela ne signifie pas que je suis un robot ! J'aime insuffler une touche d'humour dans tout ce que je fais. Attendez-vous à quelques blagues occasionnelles et à des anecdotes amusantes parsemées ici et là. Après tout, la technologie peut parfois sembler intimidante, mais cela ne signifie pas que nous ne pouvons pas en rire !</p>
+
+	<p class="mb-3">J'espère que vous apprécierez votre séjour sur mon blog et que vous trouverez les informations que vous recherchez. N'hésitez pas à me contacter si vous avez des questions, des suggestions ou simplement si vous voulez partager une bonne blague.</p>
+
+	<p class="mb-3">Merci de votre visite et restez à l'affût pour de nouvelles publications passionnantes !</p>
+</div>
 
 {% endblock %}

@@ -18,84 +18,98 @@ a {
     text-decoration: none;
 }
 
-#main-nav {
-    height: 5rem;
-    position: fixed;
-    right: 0;
-    top: 0;
-    width: 100%;
-    z-index: 0 !important;
-}
-
 .side-bar {
     height: 100%;
     position: fixed;
     top: 5rem;
     width: 20%;
-    z-index: 4 !important;
+    z-index: 1 !important;
 }
 
 .main-content {
     margin-left:20%;
-    margin-top: 65px;
-
-    .inner-content {
-
-        padding: 3rem;
-    }
-
+    margin-top: 110px;
 }
 
-.article {
-
+.articleMain {
     img {
         width: 300px;
-        height: 50px;
+        height: 200px;
         border-radius: 10px;
-        height: max-content;
-        
     }
-
 }
-.articleMain {
-
+.article {
     img {
         width: 900px;
+        height: 100%;
         border-radius: 10px;
-        height: max-content;
+        
     }
-
 }
 
 .social {
     width: 2rem !important;
-    // aspect-ratio: 4/3;
-    // object-fit: contain;
+    height: 2rem !important;
+    aspect-ratio: 4/3;
+    object-fit: contain;
     mix-blend-mode: initial;
 }
+
+#description, #catchPhrase, #whowearebody {
+    text-align: justify;
+}
+
+#whowearebody {
+    margin-top: 100px;
+}
+
+
 
 ////// MEDIA QUERY
 /// 
       
-    @media (max-width: 1000px) {
+@media (max-width: 1023px) {
+    .articleMain {
+        flex-direction: column;
 
-        #main-nav {
-            position: fixed;
-            top: 0;
-            right: 0;
-            z-index: 9999;
-            
-            height: 5rem;
-            width: 100%;
+        #imgArticle {
+            width: 330px;
+            height: auto;
+            border-radius: 10px;
+            display: flex;
+            position: relative;
+            margin: auto !important;
+            margin-bottom: 2rem !important;
         }
-
-        .side-bar {
-        display: none;
-        }
-
-        .main-content {
-            margin-left: 0;
-            margin-top: 65px;
-        }
-
     }
+
+    .side-bar {
+    display: none;
+    }
+
+    .main-content {
+        margin-left: 0;
+        margin-top: 65px;
+        padding: 1rem !important;
+    }
+
+    #article {
+        flex-direction: column;
+
+        p {
+            margin-top: 1rem;
+        }
+    }
+  }
+  
+
+@media (max-width: 1440px) {
+
+    #photoSidebar {
+        flex-direction: column;
+        padding-left: 0 !important;
+        margin-bottom: 2rem;
+    }
+
+
+}

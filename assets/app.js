@@ -11,8 +11,10 @@ import './styles/app.scss';
 // start the Stimulus application
 import './bootstrap';
 
+
 // loads the jquery package from node_modules
 import $ from 'jquery';
+
 
 // import the function from greet.js (the .js extension is optional)
 // ./ (or ../) means to look for a local file

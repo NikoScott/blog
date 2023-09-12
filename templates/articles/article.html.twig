@@ -26,7 +26,7 @@
 			<p class="mb-3"> {{ article.catchPhrase }} </p>
 		</div>
 
-		<div class="articleMain mb-3">
+		<div class="article mb-3">
 			<img class="custom-shadow" src="{{ asset('images/articles/' ~ article.picture ) }}" alt="photo {{ article.category }}"/>
 		</div>
 
@@ -62,7 +62,7 @@ RESEAUX SOCIAUX
         </div>
 
 
-		<div class="mt-5" style="width:80%">
+		<div id="description" class="mt-5" style="width:80%">
 			{{article.description | raw}}
 		</div>
 
@@ -71,7 +71,9 @@ RESEAUX SOCIAUX
 			{{ article.author }}, le {{ article.date|date('d-m-Y') }}
 		</p>
 
+		{% if app.user %}
 		<div class="separator mt-5" style="width:30%; height:1px; background:rgba(173,173,173,1)"></div>
+		{% endif %}
 
 {# 
 COMMENTAIRES 
@@ -91,9 +93,8 @@ COMMENTAIRES
 		{% if app.user %}
 			<div class="col-8 mt-5">
 				{{ form(form_comment) }}
-				</div>
-
-			{% endif %}
+			</div>
+		{% endif %}
 
 		</div>
 
@@ -109,18 +110,16 @@ ARTICLES SIMILAIRES
 					Articles similaires
 				</h2>
 
-				<a href="#">
+				<a href="{{ path('show_article_by_id', { id : relatedArticle.id }) }}">
 					<div class="card custom-shadow" style="width:18rem;">
 						<img src="{{ asset('images/articles/' ~ relatedArticle.picture ) }}" style="width:100%;"/>
 						<div class="card-body">
 							<h5 class="card-title">{{ relatedArticle.title }}</h5>
 							<p class="card-text"></p>
-						</a>
+						</div>
 					</div>
+				</a>
 			</div>
-
 		{% endfor %}
 
-		</div>
-
-	{% endblock %}
+{% endblock %}

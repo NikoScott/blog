@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ContactType extends AbstractType
 {
@@ -39,24 +40,30 @@ class ContactType extends AbstractType
             ->add('message', TextareaType::class, [
                 'label' => 'Votre message',
                 'attr' => array(
-                    'placeholder' => 'Entrer votre message ici'
-                )
+                    'placeholder' => 'Entrer votre message ici'),
+                'constraints' => [
+                new NotBlank([
+                    'message' => 'Entrez un message',
+                ]),
+                ],
             ])
+
             ->add('object', ChoiceType::class, [
                 'label' => 'Que nous vaut le plaisir?',
-                'choices' => [
-                    'Je souhaite vous contacter par choix 1' => 'Choix 1',
-                    'Je souhaite vous contacter par choix 2' => 'Choix 2' ,
-                    'Je souhaite vous contacter par choix 3' => 'Choix 3'
+                'choices' => [                    
+                    'Problèmes de compte' => 'Choix 1',
+                    "Problèmes d'article" => 'Choix 2' ,
+                    'Autres' => 'Choix 3'
                 ]
             ])
             ->add('phone', TextType::class, [
                 'label' => 'Votre numéro de téléphone',
                 'attr' => array(
                     'placeholder' => 'Entrer votre numéro de téléphone'
-                )
+                ),
             ])
             ->add('save', SubmitType::class, [
+                'label' => 'Envoyer',
                 'attr' => ['class' => 'save btn-primary'],
             ]);
         ;
