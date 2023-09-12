@@ -22,7 +22,7 @@
 			{{ article.title}}
 		</h1>
 
-		<div class="text-center" style="width:50%"> 
+		<div class="text-center"> 
 			<p class="mb-3"> {{ article.catchPhrase }} </p>
 		</div>
 
@@ -62,12 +62,12 @@ RESEAUX SOCIAUX
         </div>
 
 
-		<div id="description" class="mt-5" style="width:80%">
+		<div id="description" class="mt-5" style="width:90%">
 			{{article.description | raw}}
 		</div>
 
 		{# directive twig : petite fonctionalité twig qui permet de parser une date #}
-		<p class="mb-3 text-end fst-italic">
+		<p class="mt-2 mb-3 text-end fst-italic">
 			{{ article.author }}, le {{ article.date|date('d-m-Y') }}
 		</p>
 

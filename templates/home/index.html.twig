@@ -1,29 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block meta_description %}	Bienvenue sur notre blog ! {% endblock %}
+{% block meta_description %} Bienvenue sur notre blog ! {% endblock %}
 
 {% block title %}Page d'accueil{% endblock %}
 
 {% block body %}
 
-	<div class="side-bar custom-shadow mt-1 ps-1 pt-4">
+	<div class="side-bar side-shadow mt-1 ps-1 pt-4">
 	    
-		<div class="logo">		</div>
-		<div id="photoSidebar" class="d-flex justify-content-center align-items-center ps-5">
-			<img class="mb-3" src="{{ asset('build/images/profile.jpg') }}" style="width:150px; border-radius:100%;" alt="nicolas">
-			<a class="fst-italic p-2" href="https://nicolaspereire.fr"> Nicolas PEREIRE </a>
-		</div>
-
 		<div class="list-categories">
 			<ul>
 				{% for category in listCategories %}
-					<div class="separator" style="height:2px;background:rgba(255,255,255, 0.05);"> </div>
+					
 					<li class="my-3">
 						<a class="text-primary-emphasis" href="{{ path('show_articles_by_category', {id : category.id}) }}">
 							{{category.name}} </a>
+							<div class="separator mt-3" style="height:2px;background:rgba(255,255,255, 0.05);"> </div>
 					</li>
 				{% endfor %}
-				<div class="separator " style="height:2px;background:rgba(255,255,255, 0.05);"> </div>
 			</ul>
 			{% if is_granted('ROLE_ADMIN') %}      
 			<a href="{{path('ajout_category')}}" class="ms-4 btn btn-warning"> Creer une nouvelle catégorie </a>
