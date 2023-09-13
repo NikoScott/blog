@@ -55,6 +55,7 @@ class ArticlesController extends AbstractController
         // je récupère le paramètre id via l'argument $id
 
         $article = $entityManager->getRepository(Articles::class)->findBy(["id" => $id ])[0];
+
         
         $relatedArticles = $entityManager->getRepository(Articles::class)->findLastThreeRelatedArticles($article->getCategory(), $id);
 

@@ -13,18 +13,16 @@
 				{% for category in listCategories %}
 					
 					<li class="my-3">
-						<a class="text-primary-emphasis" href="{{ path('show_articles_by_category', {id : category.id}) }}">
+						<a aria-label="article par catégorie" class="text-primary-emphasis" href="{{ path('show_articles_by_category', {id : category.id}) }}">
 							{{category.name}} </a>
 							<div class="separator mt-3" style="height:2px;background:rgba(255,255,255, 0.05);"> </div>
 					</li>
 				{% endfor %}
 			</ul>
 			{% if is_granted('ROLE_ADMIN') %}      
-			<a href="{{path('ajout_category')}}" class="ms-4 btn btn-warning"> Creer une nouvelle catégorie </a>
+			<a aria-label="ajouter une catégorie" href="{{path('ajout_category')}}" class="ms-4 btn btn-warning"> Creer une nouvelle catégorie </a>
     		{% endif %}
 					
-				
-
 		</div>
 	</div>
 
@@ -40,7 +38,7 @@
 
 {# BOUTON POUR ADMIN #}
 			{% if is_granted('ROLE_ADMIN') %}      
-				<a href="{{path('ajout_article')}}" class="btn btn-warning mb-3"> Creer un nouvel article </a>
+				<a aria-label="creer un nouvel article" href="{{path('ajout_article')}}" class="btn btn-warning mb-3"> Creer un nouvel article </a>
 			{% endif %}
 
 
@@ -51,25 +49,25 @@
 			{% for article in listArticles %}
 				<div class="d-flex flex-column" style="width:100%;">
 					<div class="articleMain d-flex my-3 cursor-pointer">
-						<a class="flex-column text-decoration-none text-reset" href="{{ path('show_article_by_id', { id : article.id }) }}">
+						<a aria-label="article par id" class="flex-column text-decoration-none text-reset" href="{{ path('show_article_by_id', { id : article.id }) }}">
 							<img id="imgArticle" class="custom-shadow me-3" src="{{ asset('images/articles/' ~ article.picture ) }}" alt="photo-article"/>
 						</a>
 						<div class="text-body-secondary mb-1 fst-italic ps-2" style="font-size:12px">
-							<a href="{{ path('show_articles_by_category', { id : article.category.id}) }}"> {{ article.category }} - </a> {{ article.date|date("d-m-Y") }}
-							<a href="{{ path('show_article_by_id', { id : article.id }) }}">
+							<a aria-label="article par catégorie" href="{{ path('show_articles_by_category', { id : article.category.id}) }}"> {{ article.category }} - </a> {{ article.date|date("d-m-Y") }}
+							<a aria-label="article par id" href="{{ path('show_article_by_id', { id : article.id }) }}">
 								<h2 class="h3 fst-normal text-primary-emphasis">{{ article.title | raw}}</h2>
 								<p id="catchPhrase" class="mb-2 fst-normal text-body-secondary" style="font-size:16px"> {{ article.catchPhrase }} </p>
 							</a>
 							<div id="social" class="d-flex flex-column fst-normal">
 								<p class="text-body-secondary mb-1"> Partager l'article : </p>
 								<div class="">
-									<a href="http://www.facebook.com/sharer.php?u={{ app.request.uri }}&t={{ article.title}}" onclick="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;">
+									<a aria-label="partager sur facebook" href="http://www.facebook.com/sharer.php?u={{ app.request.uri }}&t={{ article.title}}" onclick="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;">
 										<img src="{{ asset('build/images/fb_logo.png') }}" alt="fb_logo" class="social mb-3">
 									</a>
-									<a href="https://twitter.com/share?url={{ app.request.uri }}&t={{ article.title}}" onclick="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;">
+									<a aria-label="partager sur twitter" href="https://twitter.com/share?url={{ app.request.uri }}&t={{ article.title}}" onclick="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;">
 										<img src="{{ asset('build/images/twitter_logo.png') }}" alt="twitter_logo" class="social mb-3">
 									</a>
-									<a href="https://www.linkedin.com/shareArticle?mini=true&url={{ app.request.uri }}&t={{ article.title}}" onclick="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;">
+									<a aria-label="partager sur linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url={{ app.request.uri }}&t={{ article.title}}" onclick="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;">
 										<img src="{{ asset('build/images/linkedin_logo.png') }}" alt="linkedin_logo" class="social mb-3">
 									</a>
 								</div>

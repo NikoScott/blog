@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -49,6 +50,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateOfBirth = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $picture = null;
+
+    private $posterFile;
+
 
     public function __construct()
     {
@@ -211,6 +218,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setDateOfBirth(\DateTimeInterface $dateOfBirth): self
     {
         $this->dateOfBirth = $dateOfBirth;
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(string $picture): static
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    public function getPosterFile(): ?UploadedFile
+    {
+        return $this->posterFile;
+    }
+
+    public function setPosterFile(UploadedFile $posterFile): self
+    {
+        $this->posterFile = $posterFile;
 
         return $this;
     }

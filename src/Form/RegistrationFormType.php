@@ -6,6 +6,7 @@ use App\Entity\User;
 use Doctrine\DBAL\Types\DateType;
 use Doctrine\DBAL\Types\TextType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType as TypeDateType;
@@ -36,7 +37,7 @@ class RegistrationFormType extends AbstractType
                 'placeholder' => 'Votre nom'),
             'label' => 'Nom'
         ))
-        ->add('dateOfBirth', TypeDateType::class, array(
+        ->add('dateOfBirth', BirthdayType::class, array(
             'label_attr' => ['class' => 'text-less-grey'],
             'attr' => array(
                 'placeholder' => 'Votre date de naissance'),

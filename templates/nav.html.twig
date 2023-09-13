@@ -9,37 +9,37 @@
         <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
             <ul class="navbar-nav text-center align-items-center text-body-secondary mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link m-3 text-primary-emphasis" aria-current="page" href="{{ path('app_home')}}"> Accueil </a>
+                    <a aria-label="Accueil" class="nav-link m-3 text-primary-emphasis" aria-current="page" href="{{ path('app_home')}}"> Accueil </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link m-3 text-primary-emphasis" aria-current="page" href="{{ path('app_whoweare')}}"> Qui sommes nous ? </a>
+                    <a aria-label="Qui sommes nous" class="nav-link m-3 text-primary-emphasis" aria-current="page" href="{{ path('app_whoweare')}}"> Qui sommes nous ? </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link m-3 text-primary-emphasis" aria-current="page" href="{{ path('app_contact')}}"> Contact </a>
+                    <a aria-label="Contact" class="nav-link m-3 text-primary-emphasis" aria-current="page" href="{{ path('app_contact')}}"> Contact </a>
                 </li>
                 {% if app.user %}
                 <li class="nav-item">
-                    <a class="nav-link m-3 text-primary-emphasis" aria-current="page" href="{{ path('app_profile')}}"> Profil </a>
+                    <a aria-label="Profil" class="nav-link m-3 text-primary-emphasis" aria-current="page" href="{{ path('app_profile')}}"> Profil </a>
                 </li>
                 {% if is_granted('ROLE_ADMIN') %}      
-                    <a href="{{path('admin')}}" class="btn btn-info"> Back office </a>
+                    <a aria-label="Back office" href="{{path('admin')}}" class="btn btn-info"> Back office </a>
                 {% endif %}
                 <li class="nav-item">
-                    <a class="nav-link m-3 text-primary-emphasis" aria-current="page" href="{{ path('app_logout')}}"> Déconnexion </a>
+                    <a aria-label="Déconnexion" class="nav-link m-3 text-primary-emphasis" aria-current="page" href="{{ path('app_logout')}}"> Déconnexion </a>
                 </li>
                 {% else %}
                 <li class="nav-item">
-                    <a class="nav-link m-3 text-primary-emphasis" aria-current="page" href="{{ path('app_login')}}"> Connexion </a>
+                    <a aria-label="Connexion" class="nav-link m-3 text-primary-emphasis" aria-current="page" href="{{ path('app_login')}}"> Connexion </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link m-3 text-primary-emphasis" aria-current="page" href="{{ path('app_register')}}"> Inscription </a>
+                    <a aria-label="Inscription" class="nav-link m-3 text-primary-emphasis" aria-current="page" href="{{ path('app_register')}}"> Inscription </a>
                 </li>
                 {% endif %}
             </ul>
-        <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Recherche" aria-label="Recherche">
-            <button class="btn btn-outline-info" type="submit">Recherche</font></font></button>
-        </form>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" id="search-content" placeholder="Recherche" aria-label="Recherche">
+                <button class="btn btn-outline-info" type="submit">Recherche</font></font></button>
+            </form>
         </div>
       </div>
     </nav>
