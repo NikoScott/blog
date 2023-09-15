@@ -26,7 +26,7 @@
 			<p class="mb-3"> {{ article.catchPhrase }} </p>
 		</div>
 
-		<div class="article mb-3">
+		<div class="article  d-flex justify-content-center mb-3">
 			<img class="custom-shadow" src="{{ asset('images/articles/' ~ article.picture ) }}" alt="photo {{ article.category }}"/>
 		</div>
 
@@ -34,19 +34,23 @@
 RESEAUX SOCIAUX
  #}
 		<p class="mt-3 text-body-secondary separator"> Partager cet article </p>
-		{# <div class="d-flex"> #}
-			<ul>
-				<a aria-label="Partager sur facebook" href="http://www.facebook.com/sharer.php?u={{ app.request.uri }}&t={{ article.title}}" onclick="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;">
-				<img src="{{ asset('build/images/fb_logo.png') }}" alt="fb_logo" class="social mb-3">
-				</a>
-				<a aria-label="Partager sur twitter" href="https://twitter.com/share?url={{ app.request.uri }}&t={{ article.title}}" onclick="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;">
-				<img src="{{ asset('build/images/twitter_logo.png') }}" alt="twitter_logo" class="social mb-3">
-				</a>
-				<a aria-label="Partager sur linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url={{ app.request.uri }}&t={{ article.title}}" onclick="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;">
-				<img src="{{ asset('build/images/linkedin_logo.png') }}" alt="linkedin_logo" class="social mb-3">
-				</a>
-			</ul>
-		{# </div> #}
+			<div class="social-links d-flex">
+				<div class="reseaux-sociaux">
+					<a aria-label="Partager sur Facebook" href="http://www.facebook.com/sharer.php?u={{ app.request.uri }}&t={{ article.title}}" onclick="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;">
+						<img src="{{ asset('build/images/fb_logo.png') }}" alt="fb_logo" class="social-article mb-3">
+					</a>
+				</div>
+				<div class="reseaux-sociaux">
+					<a aria-label="Partager sur Twitter" href="https://twitter.com/share?url={{ app.request.uri }}&t={{ article.title}}" onclick="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;">
+						<img src="{{ asset('build/images/twitter_logo.png') }}" alt="twitter_logo" class="social-article mb-3">
+					</a>
+				</div>
+				<div class="reseaux-sociaux">
+					<a aria-label="Partager sur LinkedIn" href="https://www.linkedin.com/shareArticle?mini=true&url={{ app.request.uri }}&t={{ article.title}}" onclick="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;">
+						<img src="{{ asset('build/images/linkedin_logo.png') }}" alt="linkedin_logo" class="social-article mb-3">
+					</a>
+				</div>
+			</div>
 
 {# SEULEMENT POUR ADMIN #}
 
@@ -66,9 +70,8 @@ RESEAUX SOCIAUX
 			{{article.description | raw}}
 		</div>
 
-		{# directive twig : petite fonctionalité twig qui permet de parser une date #}
 		<p class="mt-2 mb-3 text-end fst-italic">
-			{{ article.author }}, le {{ article.date|date('d-m-Y') }}
+			{{ article.author }}, le {{ article.date|date('d-m-Y') }} {# permet de parser une date #}
 		</p>
 
 		{% if app.user %}
@@ -81,7 +84,14 @@ COMMENTAIRES
 		{% for comment in comments %}
 			<div class="mt-5 p-2 col-8 mx-auto custom-shadow" style="border-radius:10px">
 
-				<p class="fst-italic">{{ comment.date|date("d-m-Y") }} de {{ comment.user.firstName }} {{ comment.user.lastName }}</p>
+				<p class="fst-italic">{{ comment.date|date("d-m-Y") }}</p>
+				<div class="d-flex"> 
+					{% if app.user.picture is not null %}
+						<img src="{{ asset('images/articles/' ~ app.user.picture) }}">
+					{% endif %}
+
+					<p> {{ comment.user.firstName }} {{ comment.user.lastName }}</p>
+				</div>
 
 				<p class="ms-5 font-weight-light">{{ comment.comment }}</p>
 			</div>
@@ -102,24 +112,26 @@ COMMENTAIRES
 ARTICLES SIMILAIRES
  #}
 
-		{% for relatedArticle in relatedArticles %}
-			<div class="separator mx-auto mt-5 mb-5" style="width:50%; height:1px; background:rgba(173,173,173,1)"></div>
-
-			<div class="mx-auto mb-5 d-flex flex-column align-items-center" style="width:80%">
-				<h2 class="mb-3 text-center text-body-secondary">
-					Articles similaires
-				</h2>
-
-				<a aria-label="Articles similaires" href="{{ path('show_article_by_id', { id : relatedArticle.id }) }}">
-					<div class="card custom-shadow" style="width:18rem;">
-						<img src="{{ asset('images/articles/' ~ relatedArticle.picture ) }}" style="width:100%;"/>
-						<div class="card-body">
-							<h5 class="card-title">{{ relatedArticle.title }}</h5>
-							<p class="card-text"></p>
+{% if relatedArticles is not empty %}
+		<div class="separator mx-auto mt-5 mb-5" style="width:50%; height:1px; background:rgba(173,173,173,1)"></div>
+		<div class="row mx-auto col-md-10 p-1 justify-content-center">
+			<h2 class="mb-4 text-center text-body-secondary"> Articles similaires </h2>
+			
+			{% for relatedArticle in relatedArticles %}
+				<div class="d-flex justify-content-center m-2 p-1" style="width:auto">
+					<a aria-label="Articles similaires" href="{{ path('show_article_by_id', { id : relatedArticle.id }) }}">
+						<div class="card custom-shadow" style="width:18rem; height:20rem;">
+							<img src="{{ asset('images/articles/' ~ relatedArticle.picture ) }}" style="width:100%;"/>
+							<div class="card-body">
+								<h5 class="card-title">{{ relatedArticle.title }}</h5>
+								{# <p class="card-text"></p> #}
+							</div>
 						</div>
-					</div>
-				</a>
-			</div>
-		{% endfor %}
+					</a>
+				</div>
+			{% endfor %}
+		</div>
+{% endif %}
+
 
 {% endblock %}

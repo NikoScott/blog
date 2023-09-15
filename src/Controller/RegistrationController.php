@@ -45,6 +45,13 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            if($file = $user->getPosterFile()) {
+                $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+                $file->move('./images/user', $fileName);
+                    
+                $user->setPicture($fileName);
+                }
+
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -56,6 +63,7 @@ class RegistrationController extends AbstractController
                     ->subject('Veuillez confirmer votre mail')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
+            
             // do anything else you need here, like send an email
             $this->addFlash('confirmation', 'Votre inscription est en cours, veuillez confirmer votre mail');
 

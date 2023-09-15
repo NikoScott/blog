@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,42 +15,54 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProfileController extends AbstractController
 {
     #[Route('/profile', name: 'app_profile')]
-    public function index(): Response
+    public function index(EntityManagerInterface $entityManager, Request $request): Response
     {
+        $user = $this->getUser();
+
+        $recentComment = $entityManager->getRepository(Comment::class)->findBy(
+            ['user' => $user], 
+            ['date' => 'DESC'],
+            3);
+
+        $comments = $entityManager->getRepository(Comment::class)->findBy(
+            ['user' => $user],
+        );
+
         return $this->render('profile/index.html.twig', [
             'controller_name' => 'ProfileController',
+            'recentComment' => $recentComment,
+            'comments' => $comments,
         ]);
     }
 
+    #[Route('/edit_profile', name: 'app_edit_profile')]
+    public function edit(EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $user = $this->getUser();
 
-    // a repprendre pour modifier le profile de l'utilisateur
-    ////////
+        $form = $this->createForm(RegistrationFormType::class, $user);
 
-    // #[Route('/profile/{id}/modify', name: 'edit_user', requirements: ['id' => '\d+'])]
-    // public function editProfile(EntityManagerInterface $entityManager, string $id, Request $request) {
+        $form->handleRequest($request);
 
-    //     $user = $entityManager->getRepository(User::class)->find($id);
-    //     $form = $this->createForm(RegistrationFormType::class, $user);
+        if($form->isSubmitted() && $form->isValid()) {
+        
+            if($file = $user->getPosterFile()) {
+            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+            $file->move('./images/user', $fileName);
 
-    //     $form->handleRequest($request);
+            $user->setPicture($fileName);
+            }
 
-    //     if($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($user);
+            $entityManager->flush();
 
-    //         if($file = $user->getPosterFile()) {
-    //         $fileName = md5(uniqid()) . '.' . $file->guessExtension();
-    //         $file->move('./profile', $fileName);
+            $this->addFlash('confirmation', 'Votre profil a bien été modifié en BDD');
+            return $this->redirectToRoute('app_profile');
+        }
 
-    //         $user->setPicture($fileName);
-    //         }
-
-    //         $entityManager->persist($user);
-    //         $entityManager->flush();
-
-    //         $this->addFlash('confirmation', 'Votre profil a bien été modifié');
-    //         return $this->redirectToRoute('app_profile');
-
-    //     }
-
-    // }
-
+        return $this->render('profile/edit.html.twig', [
+            'registrationForm' => $form->createView(),
+        ]);
+    }
 }
+

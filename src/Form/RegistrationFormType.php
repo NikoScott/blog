@@ -9,13 +9,12 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateType as TypeDateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType as TypeTextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -44,6 +43,12 @@ class RegistrationFormType extends AbstractType
             'data' => new \DateTime(),
             'label' => 'Date de naissance'
         ))
+        // ->add('dateOfBirthEdit', BirthdayType::class, array(
+        //     'label_attr' => ['class' => 'text-less-grey'],
+        //     'attr' => array(
+        //         'placeholder' => 'Votre date de naissance'),
+        //     'label' => 'Date de naissance'
+        // ))
         ->add('email', EmailType::class, array(
             'attr' => array(
                 'placeholder' => 'exmple@exemple.fr')
@@ -58,6 +63,10 @@ class RegistrationFormType extends AbstractType
                     'Autre' => 'x'
                 ],
         ])
+        ->add('posterFile', FileType::class, array(
+            'label' => 'Photo',
+            'required' => false,
+            ))
         ->add('agreeTerms', CheckboxType::class, [
             'mapped' => false,
             'constraints' => [

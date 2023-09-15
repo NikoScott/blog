@@ -4,10 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Articles;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry; 
 
 class SearchController extends AbstractController
 {
@@ -42,5 +44,32 @@ class SearchController extends AbstractController
         }
 
         return new Response(json_encode($datas));
+    }
+
+    #[Route('/search/articles', name: 'navbar')]
+    public function getAllArticles(PersistenceManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response
+    {
+        
+        $search = null;
+        // dd($request->request->get('search'));
+        if (!empty($request->request->get('search'))) {
+
+            $search = strtolower($request->request->get('search'));
+            $articles = $doctrine->getRepository(Articles::class)->findBySearch($search);
+
+            $articles = $paginator->paginate(
+                $articles, /* query NOT result */
+                $request->query->getInt('page', 1), /*page number*/
+                5 /*limit per page*/
+            );
+
+            return $this->render('articles/search.html.twig', [
+                'listArticles' => $articles,
+                'search' => $search,
+            ]);
+
+        }
+
+        return $this->redirectToRoute('app_home');
     }
 }

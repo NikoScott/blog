@@ -172,10 +172,9 @@ class ArticlesController extends AbstractController
                     $entityManager->persist($category);
                     $article->setCategory($category);
                 }
-  
-
                 // sinon je choisis dans la liste donc dessous
 
+                
                 if($file = $article->getPosterFile()) {
                 $fileName = md5(uniqid()) . '.' . $file->guessExtension();
                 $file->move('./images/articles', $fileName);

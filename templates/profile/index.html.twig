@@ -1,29 +1,51 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Profil !{% endblock %}
+{% block title %}Profil{% endblock %}
 
 {% block body %}
 
+    {# Si l'user s'est incrit avec une photo j'affiche sa photo #}
+    {# Sinon photo aléatoire #}
 <div class="d-flex justify-content-center" style="margin-top:140px;">
     <div class="p-4">
-        <img alt="profil-picture" src="https://picsum.photos/150" style="border-radius:50%">
+        {% if app.user.picture is not null %}
+            <img src="{{ asset('images/user/' ~ app.user.picture) }}" alt="profil-picture" style="width:150px; border-radius:50%">
+        {% else %}
+            <img alt="profil-picture" src="https://picsum.photos/150" style="border-radius:50%">
+        {% endif %}
+
     </div>
 
-    <div class="text-center mt-2 p-4 lh-lg">
+    <div class=" mt-2 p-4 lh-lg">
         <ul>
-            {# <li> {{ dump(app.user) }} </li> #}
             <li class="text-uppercase"> {{ app.user.firstName }}  {{ app.user.lastName }}</li>
             <li> {{ app.user.email }}</li>
             <li> {{ app.user.dateOfBirth|date("d-m-Y") }}</li>
-            <li> {{ app.user.roles[0] }}</li>
+            <li> Rôle : {{ app.user.roles[0]|replace({'ROLE_': ''}) }}</li>
         </ul>
+    </div>
+    <div class="d-flex justify-content-center p-4">
+        <a aria-label="editer le profil" href="{{path('app_edit_profile')}}" class="btn btn-light mb-3" style="height:40px">
+            <i class="fa-regular fa-pen-to-square"></i> 
+        </a>
     </div>
 </div>
 
 
-    <div class="d-flex justify-content-center p-4">
-        <a aria-label="editer le profil" href="{{path('/profile/{id}/modify')}}" class="btn btn-light mb-3"> Editer mon profil </a>
-    </div>
+{# Si l'utilisateur a déjà ecrit des commentaires ils seront affichés dessous #}
+{# Sinon rien #}
+{% if comments is not empty %}
+    <h3 class="text-center mt-4 mb-4"> Vos récents commentaires :</h3>
+    {% for comment in recentComment %}
+        <div class="card bg-secondary-subtle text-emphasis-secondary mb-2 mx-auto col-md-6 d-flex">
+            <p class="fst-italic" style="font-size:14px">{{ comment.date|date("d-m-Y") }}</p>
+            <a aria-label="{{ comment.article.title }}" class="">{{ comment.article.title }}</a>
+            <p class="ms-4"> « {{ comment.comment }} » </p>
+        </div>
+    {% endfor %}
+{% endif %}
+
+
 
 
 {% endblock %}
