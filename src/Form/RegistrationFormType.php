@@ -40,15 +40,8 @@ class RegistrationFormType extends AbstractType
             'label_attr' => ['class' => 'text-less-grey'],
             'attr' => array(
                 'placeholder' => 'Votre date de naissance'),
-            'data' => new \DateTime(),
             'label' => 'Date de naissance'
         ))
-        // ->add('dateOfBirthEdit', BirthdayType::class, array(
-        //     'label_attr' => ['class' => 'text-less-grey'],
-        //     'attr' => array(
-        //         'placeholder' => 'Votre date de naissance'),
-        //     'label' => 'Date de naissance'
-        // ))
         ->add('email', EmailType::class, array(
             'attr' => array(
                 'placeholder' => 'exmple@exemple.fr')

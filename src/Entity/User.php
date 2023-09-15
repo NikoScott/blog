@@ -51,9 +51,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateOfBirth = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $dateOfBirthEdit = null;
-
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
 
@@ -221,18 +218,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setDateOfBirth(\DateTimeInterface $dateOfBirth): self
     {
         $this->dateOfBirth = $dateOfBirth;
-
-        return $this;
-    }
-
-    public function getDateOfBirthEdit(): ?\DateTimeInterface
-    {
-        return $this->dateOfBirthEdit;
-    }
-
-    public function setDateOfBirthEdit(\DateTimeInterface $dateOfBirthEdit): self
-    {
-        $this->dateOfBirthEdit = $dateOfBirthEdit;
 
         return $this;
     }
