@@ -56,7 +56,7 @@ class ProfileController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->addFlash('confirmation', 'Votre profil a bien été modifié en BDD');
+            $this->addFlash('confirmation', 'Votre profil a bien été modifié');
             return $this->redirectToRoute('app_profile');
         }
 
