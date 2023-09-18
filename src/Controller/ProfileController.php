@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Entity\User;
+use App\Form\EditProfileFormType;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProfileController extends AbstractController
 {
     #[Route('/profile', name: 'app_profile')]
-    public function index(EntityManagerInterface $entityManager, Request $request): Response
+    public function index(EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
 
@@ -39,18 +40,17 @@ class ProfileController extends AbstractController
     public function edit(EntityManagerInterface $entityManager, Request $request): Response
     {
         $user = $this->getUser();
-
-        $form = $this->createForm(RegistrationFormType::class, $user);
-
+        $form = $this->createForm(EditProfileFormType::class, $user);
         $form->handleRequest($request);
-
+        
         if($form->isSubmitted() && $form->isValid()) {
         
             if($file = $user->getPosterFile()) {
-            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
-            $file->move('./images/user', $fileName);
 
-            $user->setPicture($fileName);
+                $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+                $file->move('./images/user', $fileName);
+
+                $user->setPicture($fileName);
             }
 
             $entityManager->persist($user);
@@ -61,7 +61,7 @@ class ProfileController extends AbstractController
         }
 
         return $this->render('profile/edit.html.twig', [
-            'registrationForm' => $form->createView(),
+            'EditProfileFormType' => $form->createView(),
         ]);
     }
 }

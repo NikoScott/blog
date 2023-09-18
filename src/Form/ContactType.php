@@ -47,7 +47,6 @@ class ContactType extends AbstractType
                 ]),
                 ],
             ])
-
             ->add('object', ChoiceType::class, [
                 'label' => 'Que nous vaut le plaisir?',
                 'choices' => [                    

@@ -4,6 +4,16 @@
 
 {% block body %}
 
+<div class="mx-auto justify-content-center" style="margin-top:140px; width:30%">
+{# Afficher les messages flash #}
+    {% for notice in app.flashes('confirmation') %}
+        <div class="alert alert-success text-center">
+        {{ notice }}
+        </div>
+    {% endfor %}
+</div>
+
+
     {# Si l'user s'est incrit avec une photo j'affiche sa photo #}
     {# Sinon photo aléatoire #}
 <div class="d-flex justify-content-center" style="margin-top:140px;">
