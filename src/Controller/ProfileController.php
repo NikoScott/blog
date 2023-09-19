@@ -23,7 +23,7 @@ class ProfileController extends AbstractController
         $recentComment = $entityManager->getRepository(Comment::class)->findBy(
             ['user' => $user], 
             ['date' => 'DESC'],
-            3);
+            5);
 
         $comments = $entityManager->getRepository(Comment::class)->findBy(
             ['user' => $user],

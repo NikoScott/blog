@@ -19,9 +19,9 @@
 					</li>
 				{% endfor %}
 			</ul>
-			{% if is_granted('ROLE_ADMIN') %}      
+			{# {% if is_granted('ROLE_ADMIN') %}      
 			<a aria-label="ajouter une catégorie" href="{{path('ajout_category')}}" class="ms-4 btn btn-warning"> Creer une nouvelle catégorie </a>
-    		{% endif %}
+    		{% endif %} #}
 					
 		</div>
 	</div>
@@ -31,15 +31,15 @@
 
 {# Afficher les messages flash #}
 			{% for notice in app.flashes('confirmation') %}
-				<div class="alert alert-success text-center">
+				<div class="alert alert-success text-center mt-3" id="confirmation-message">
 				{{ notice }}
 				</div>
 			{% endfor %}
 
-{# BOUTON POUR ADMIN #}
-			{% if is_granted('ROLE_ADMIN') %}      
+{# Permet d'ajouter un article sans passer par le back office #}
+			{# {% if is_granted('ROLE_ADMIN') %}      
 				<a aria-label="creer un nouvel article" href="{{path('ajout_article')}}" class="btn btn-warning mb-3"> Creer un nouvel article </a>
-			{% endif %}
+			{% endif %} #}
 
 
 			<h1 class="mb-5 text-primary">
@@ -56,8 +56,8 @@
 							<a aria-label="article par catégorie" href="{{ path('show_articles_by_category', { id : article.category.id}) }}"> {{ article.category }} - </a> {{ article.date|date("d-m-Y") }}
 							<a aria-label="article par id" href="{{ path('show_article_by_id', { id : article.id }) }}">
 								<h2 class="h3 fst-normal text-primary-emphasis">{{ article.title | raw}}</h2>
-								<p id="catchPhrase" class="mb-2 fst-normal text-body-secondary" style="font-size:16px"> {{ article.catchPhrase }} </p>
 							</a>
+								<p id="catchPhrase" class="mb-2 fst-normal text-body-secondary" style="font-size:16px"> {{ article.catchPhrase }} </p>							
 							<div id="social" class="d-flex flex-column fst-normal">
 								<p class="text-body-secondary mb-1"> Partager l'article : </p>
 								<div class="">

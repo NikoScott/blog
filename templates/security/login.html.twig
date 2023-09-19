@@ -1,46 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Log in!
+{% endblock %}
 
 {% block body %}
 
-<div class="mt-5 p-5 col-8 mx-auto align-items-center">
+	<div class="col-md-4 p-2 mx-auto align-items-center" style="margin-top:125px !important">
 
-    {# Afficher les messages flash #}
-    {% for notice in app.flashes('confirmation') %}
-        <div class="alert alert-success text-center">
-        {{ notice }}
-        </div>
-    {% endfor %}
+		{# Afficher les messages flash #}
+		{% for notice in app.flashes('confirmation') %}
+			<div class="alert alert-success text-center mt-3" id="confirmation-message">
+				{{ notice }}
+			</div>
+		{% endfor %}
 
-    <form method="post">
-        {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
+		<form method="post">
+			{% if error %}
+				<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+			{% endif %}
 
-        {% if app.user %}
-            <div class="mb-3">
-                Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a aria-label="déconnexion" href="{{ path('app_logout') }}">Déconnexion</a>
-            </div>
-        {% endif %}
+			{% if app.user %}
+				<div class="mb-3">
+					Vous êtes connecté en tant que
+					{{ app.user.userIdentifier }},
+					<a aria-label="déconnexion" href="{{ path('app_logout') }}">Déconnexion</a>
+				</div>
+			{% endif %}
 
-        <h1 class="h2 mt-5 text-center">Connectez vous :</h1>
-        <label class="mt-3" for="inputEmail">Mail</label>
-        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-        <label class="mt-3" for="inputPassword">Mot de passe</label>
-        <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-        <a aria-label="mot de passe oublié" href="{{ path('app_forgot_password_request') }}" > Mot de passe oublié </a>
+			<h1 class="h2 mt-5 text-center">Connectez vous :</h1>
+			<label class="mt-3 mb-1" for="inputEmail">Mail :</label>
+			<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+			<label class="mt-3 mb-1" for="inputPassword">Mot de passe :</label>
+			<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+			<a aria-label="mot de passe oublié" href="{{ path('app_forgot_password_request') }}">
+				Mot de passe oublié
+			</a>
 
-        <input type="hidden" name="_csrf_token"
-            value="{{ csrf_token('authenticate') }}">
+			<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-        <div class="mt-3 d-flex flex-column align-items-center">
-                <label>
-                    <input type="checkbox" name="_remember_me"> Se souvenir de moi
-                </label>
-                <button class="btn btn-lg btn-primary" type="submit" > Se connecter </button>
-            </div>    
-        </div>
-    </form>
-</div>
+			<div class="mt-3 d-flex flex-column text-center">
+				<label>
+					<input type="checkbox" name="_remember_me"> Se souvenir de moi
+				</label>
+				<button class="btn btn-lg btn-primary mb-2" type="submit">
+					Se connecter
+				</button>
+                <p>Envie de nous rejoindre ? <a aria-label="créer un compte" href="{{ path('app_register')}}">Créer un compte !</a></p>
+			</div>
+        </form>
+    </div>
 {% endblock %}

@@ -16,6 +16,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -54,10 +55,12 @@ class RegistrationFormType extends AbstractType
                     'Autre' => 'x'
                 ],
         ])
-        ->add('posterFile', FileType::class, array(
-            'label' => 'Photo',
+        ->add('posterFile', VichImageType::class, [
             'required' => false,
-            ))
+            'allow_delete' => true,
+            'download_uri' => true,
+            'image_uri' => true,
+        ])
         ->add('agreeTerms', CheckboxType::class, [
             'mapped' => false,
             'constraints' => [

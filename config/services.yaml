@@ -6,6 +6,7 @@
 parameters:
     locale: 'fr'
     app.path.article_images: /images/articles
+    app.path.user_images: /images/user
     app.mail_address: "%env(MAIL_ADDRESS)%"
 
 services:

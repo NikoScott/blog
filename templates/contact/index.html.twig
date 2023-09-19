@@ -1,24 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Contact{% endblock %}
+{% block title %}Contactez nous{% endblock %}
 
 {% form_theme contact_form 'bootstrap_5_layout.html.twig' %}
 
 
 {% block body %}
 
-    <div class="mt-5 p-5 col-8 mx-auto align-items-center">
-
-        {# <h3>The contact has the following errors</h3>
-        <ul>
-            {% for error in errors %}
-                <li>{{ error.message }}</li>
-            {% endfor %}
-        </ul> #}
+    <div class="col-md-4 mx-auto align-items-center" style ="margin-top:170px">
 
         {# Afficher les msg flash#}
         {% for msg in app.flashes('confirmation') %}
-            <div class="alert alert-success text-center">
+            <div class="alert alert-success text-center mt-3" id="confirmation-message">
                 {{ msg }}
             </div>
         {% endfor %}

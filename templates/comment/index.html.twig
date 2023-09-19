@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier mon commentaire{% endblock %}
+
+{% block body %}
+
+    <div class="d-flex col-md-6 mx-auto p-2 justify-content-center" style="margin-top:140px;">
+        {{ form(comment_form, {'attr': {'style': 'width: 100%;'}}) }}
+    </div>
+{% endblock %}

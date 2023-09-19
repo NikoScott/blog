@@ -17,12 +17,11 @@
 				{% endfor %}
 				<div class="separator " style="height:2px;background:rgba(255,255,255, 0.05);"> </div>
 			</ul>
-			{% if is_granted('ROLE_ADMIN') %}      
-			<a aria-label="ajouter une catégorie" href="{{path('ajout_category')}}" class="ms-4 btn btn-warning"> Creer une nouvelle catégorie </a>
-    		{% endif %}
-					
-				
 
+{# Possibilité d'ajouter une catégorie sans passer par le back office #}
+			{# {% if is_granted('ROLE_ADMIN') %}      
+			<a aria-label="ajouter une catégorie" href="{{path('ajout_category')}}" class="ms-4 btn btn-warning"> Creer une nouvelle catégorie </a>
+    		{% endif %} #}
 		</div>
 	</div>
 

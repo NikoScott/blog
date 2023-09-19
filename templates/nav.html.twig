@@ -1,51 +1,56 @@
+
+
 <nav class="navbar bg-primary-subtle navbar-expand-lg fixed-top nav-shadow">
-    <div class="container-fluid justify-content-end">
+    <div class="container-fluid bg-primary-subtle justify-content-end">
     <a class="navbar-brand" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> </font></font></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+        {# <span class="navbar-toggler-icon"></span> #}
+        <i class="fa-solid fa-bars" style="color: #0d6efd;"></i>
     </button>
         <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
             <ul class="navbar-nav text-center align-items-center text-body-secondary mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a aria-label="Accueil" class="nav-link m-3 text-primary-emphasis" aria-current="page" href="{{ path('app_home')}}"> Accueil </a>
+                    <a aria-label="Accueil" class="nav-link m-3 text-primary-emphasis" aria-current="page" href="{{ path('app_home')}}"><i class="fa-solid fa-house" style="color: #0a6efd;"></i> Accueil </a>
                 </li>
                 <li class="nav-item">
-                    <a aria-label="Qui sommes nous" class="nav-link m-3 text-primary-emphasis" aria-current="page" href="{{ path('app_whoweare')}}"> Qui sommes nous ? </a>
+                    <a aria-label="Qui sommes nous" class="nav-link m-3 text-primary-emphasis" aria-current="page" href="{{ path('app_whoweare')}}"><i class="fa-solid fa-people-group" style="color: #0a6efd;"></i> Qui sommes nous ? </a>
                 </li>
                 <li class="nav-item">
-                    <a aria-label="Contact" class="nav-link m-3 text-primary-emphasis" aria-current="page" href="{{ path('app_contact')}}"> Contact </a>
+                    <a aria-label="Contact" class="nav-link m-3 text-primary-emphasis" aria-current="page" href="{{ path('app_contact')}}"><i class="fa-solid fa-envelope" style="color: #0a6efd;"></i> Contact </a>
                 </li>
-                {% if app.user %}
+
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                 <li class="nav-item">
-                    <a aria-label="Profil" class="nav-link m-3 text-primary-emphasis" aria-current="page" href="{{ path('app_profile')}}"> Profil </a>
+                    <a aria-label="Profil" class="nav-link m-3 text-primary-emphasis" aria-current="page" href="{{ path('app_profile')}}"><i class="fa-solid fa-user" style="color:#0a6efd"></i> Mon compte </a>
                 </li>
                 {% if is_granted('ROLE_ADMIN') %}      
-                    <a aria-label="Back office" href="{{path('admin')}}" class="btn btn-info"> Back office </a>
+                    <a aria-label="Back office" href="{{path('admin')}}" class="btn btn-info"><i class="fa-solid fa-wrench" style="color: #0a6efd;"></i> Back office </a>
                 {% endif %}
                 <li class="nav-item">
-                    <a aria-label="Déconnexion" class="nav-link m-3 text-primary-emphasis" aria-current="page" href="{{ path('app_logout')}}"> Déconnexion </a>
+                    <a aria-label="Déconnexion" class="nav-link m-3 text-primary-emphasis" aria-current="page" href="{{ path('app_logout')}}"><i class="fa-solid fa-right-from-bracket" style="color: #0a6efd;"></i> Déconnexion </a>
                 </li>
                 {% else %}
                 <li class="nav-item">
-                    <a aria-label="Connexion" class="nav-link m-3 text-primary-emphasis" aria-current="page" href="{{ path('app_login')}}"> Connexion </a>
+                    <a aria-label="Connexion" class="nav-link m-3 text-primary-emphasis" aria-current="page" href="{{ path('app_login')}}"><i class="fa-solid fa-user" style="color: #0a6efd"></i> Se connecter </a>
                 </li>
-                <li class="nav-item">
+
+                {# <li class="nav-item">
                     <a aria-label="Inscription" class="nav-link m-3 text-primary-emphasis" aria-current="page" href="{{ path('app_register')}}"> Inscription </a>
-                </li>
+                </li> #}
                 {% endif %}
             </ul>
 
         {# SI je suis dans la page d'accueil j'affiche ce formulaire  #}
         {% if app.request.attributes.get('_route') == 'app_home' %}
             <form class="d-flex" role="search">
-                <input class="form-control bg-secondary-subtle me-2 custom-placeholder" type="search" id="search-content" placeholder="Recherche" aria-label="Recherche">
+                <input class="form-control bg-secondary-subtle me-2 custom-placeholder" type="search" id="search-content" style="width:120px; color:#6ea8fe" placeholder="Recherche" aria-label="Recherche">
                 <button class="btn btn-outline-info" type="submit"><i class="fa-solid fa-magnifying-glass fa-shake"></i></button>
             </form>
         {% else %}
         {# sinon j'en affiche un autre pas asynchrone  #}
             <form class="d-flex" role="search" action="/search/articles" method="POST">
-                <input class="form-control bg-secondary-subtle me-2 custom-placeholder" name="search" type="search"  placeholder="Recherche" aria-label="Recherche">
-                <button class="btn btn-outline-info" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <input class="form-control bg-secondary-subtle me-2 custom-placeholder" name="search" type="search" style="width:120px; color:#6ea8fe" placeholder="Recherche" aria-label="Recherche">
+                <button class="btn btn-outline-info" type="submit"><i class="fa-solid fa-magnifying-glass fa-shake"></i></button>
             </form>
         {% endif %}
         </div>

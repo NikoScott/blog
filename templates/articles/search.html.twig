@@ -12,15 +12,15 @@
 
 {# Afficher les messages flash #}
 			{% for notice in app.flashes('confirmation') %}
-				<div class="alert alert-success text-center">
+				<div class="alert alert-success text-center mt-3" id="confirmation-message">
 				{{ notice }}
 				</div>
 			{% endfor %}
 
-{# BOUTON POUR ADMIN #}
-			{% if is_granted('ROLE_ADMIN') %}      
+{# BOUTON POUR ADMIN sans asser par le back office #}
+			{# {% if is_granted('ROLE_ADMIN') %}      
 				<a aria-label="creer un nouvel article" href="{{path('ajout_article')}}" class="btn btn-warning mb-3"> Creer un nouvel article </a>
-			{% endif %}
+			{% endif %} #}
 
 
 			<h1 class="mb-5 text-primary">

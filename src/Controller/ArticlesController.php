@@ -55,7 +55,6 @@ class ArticlesController extends AbstractController
         // je récupère le paramètre id via l'argument $id
 
         $article = $entityManager->getRepository(Articles::class)->findBy(["id" => $id ])[0];
-
         
         $relatedArticles = $entityManager->getRepository(Articles::class)->findLastThreeRelatedArticles($article->getCategory(), $id);
 
@@ -71,7 +70,7 @@ class ArticlesController extends AbstractController
             $comment->setArticle(($article));
             $comment->setDate(new \DateTime);
             $comment->setUser($this->getUser());
-            $comment->setApprouved(false);
+            $comment->setApprouved(true);
 
             $entityManager->persist($comment);
             $entityManager->flush();
@@ -80,8 +79,8 @@ class ArticlesController extends AbstractController
             $comment = new Comment();
             $form = $this->createForm(CommentType::class, $comment);
     
-            $this->addFlash('confirmation', 'Votre commentaire sera prochainement validé');
-
+            $this->addFlash('confirmation', 'Votre commentaire est publié');
+            return $this->redirectToRoute('show_article_by_id', ['id' => $article->getId()]);
         }
 
         return $this->render('articles/article.html.twig', [

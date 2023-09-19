@@ -23,7 +23,7 @@ class Comment
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column]
-    private ?bool $approuved = null;
+    private ?bool $approuved = true; // true validé auto sinon mettre null
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $comment = null;

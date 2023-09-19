@@ -9,6 +9,7 @@
 import './styles/app.scss';
 require('@fortawesome/fontawesome-free/css/all.min.css');
 require('@fortawesome/fontawesome-free/js/all.js');
+require('bootstrap')
 
 // start the Stimulus application
 import './bootstrap';
@@ -18,20 +19,28 @@ import './bootstrap';
 import $ from 'jquery';
 
 
-// import the function from greet.js (the .js extension is optional)
-// ./ (or ../) means to look for a local file
-//import greet from '../greet';
+
+//////
+// faire disparaitre les messages flash au bout de 5 secondes
+////////
+setTimeout(function() {
+    var confirmationMessage = document.getElementById('confirmation-message');
+    if (confirmationMessage) {
+        confirmationMessage.style.display = 'none';
+    }
+}, 5000); // 5000 millisecondes = 5 secondes
 
 
-///
+////
+// ajouter une catégorie san passer par le back office
 $("#newCategory").click(function(e) {
     e.preventDefault();
     $('.show_category').toggleClass('d-none');
 });
 
+
 /// barre de recherche
 ////////////
-
 $("#search-content").on('keydown', function(e) {
 
 
