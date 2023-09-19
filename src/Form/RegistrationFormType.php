@@ -8,7 +8,6 @@ use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType as TypeTextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -55,11 +54,11 @@ class RegistrationFormType extends AbstractType
                     'Autre' => 'x'
                 ],
         ])
-        ->add('posterFile', VichImageType::class, [
+        ->add('imageFile', VichImageType::class, [
             'required' => false,
-            'allow_delete' => true,
-            'download_uri' => true,
-            'image_uri' => true,
+            // 'allow_delete' => true,
+            // 'download_uri' => true,
+            // 'image_uri' => true,
         ])
         ->add('agreeTerms', CheckboxType::class, [
             'mapped' => false,

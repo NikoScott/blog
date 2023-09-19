@@ -13,9 +13,6 @@ User-agent: *
 Disallow: /*.jpg
 Disallow: /*.png
 Disallow: /*.gif
-Disallow: /uploads/
-Disallow: /factures/
-Disallow: /videos/
 Disallow: /images/
 Disallow: /js/
 Disallow: /styles/

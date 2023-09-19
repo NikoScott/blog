@@ -45,12 +45,12 @@ class RegistrationController extends AbstractController
                 )
             );
 
-            if($file = $user->getPosterFile()) {
-                $fileName = md5(uniqid()) . '.' . $file->guessExtension();
-                $file->move('./images/user', $fileName);
+            // if($file = $user->getPictureFile()) {
+            //     // $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+            //     // $file->move('./images/user', $fileName);
                     
-                $user->setPicture($fileName);
-                }
+            //     $user->setPictureFile($file);
+            //     }
 
             $entityManager->persist($user);
             $entityManager->flush();

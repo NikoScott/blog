@@ -18,8 +18,8 @@
     {# Sinon photo aléatoire #}
 <div class="d-flex justify-content-center" style="margin-top:140px;">
     <div class="p-4">
-        {% if app.user.picture is not null %}
-            <img src="{{ asset('images/user/' ~ app.user.picture) }}" alt="profil-picture" style="width:150px; border-radius:50%">
+        {% if app.user.imageName is not null %}
+            <img src="{{ asset('images/user/' ~ app.user.imageName) }}" alt="profil-picture" style="width:150px;height:150px;object-fit: contain;">
         {% else %}
             <img alt="profil-picture" src="https://picsum.photos/150" style="border-radius:50%">
         {% endif %}

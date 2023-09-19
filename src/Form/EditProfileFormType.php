@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType as TypeTextType;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class EditProfileFormType extends AbstractType
 {
@@ -51,7 +52,7 @@ class EditProfileFormType extends AbstractType
                     'Autre' => 'x'
                 ],
         ])
-        ->add('posterFile', FileType::class, array(
+        ->add('imageFile', VichImageType::class, array(
             'label' => 'Photo',
             'required' => false,
             ))

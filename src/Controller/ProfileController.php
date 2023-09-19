@@ -45,13 +45,15 @@ class ProfileController extends AbstractController
         
         if($form->isSubmitted() && $form->isValid()) {
         
-            if($file = $user->getPosterFile()) {
+            // if ($user->getImageFile()) {
+            //     $fileToRemove = $user->getImageFile();
+                          
+            //     if (file_exists($fileToRemove)) {
+            //     dd('dfrrer');
 
-                $fileName = md5(uniqid()) . '.' . $file->guessExtension();
-                $file->move('./images/user', $fileName);
-
-                $user->setPicture($fileName);
-            }
+            //         unlink($fileToRemove); // Supprime le fichier
+            //     }
+            // }
 
             $entityManager->persist($user);
             $entityManager->flush();

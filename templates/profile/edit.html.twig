@@ -4,8 +4,13 @@
 
 {% block body %}
 
+{# <pre>
+    {{ dump(EditProfileFormType.imageFile.file) }}
+</pre> #}
+
+
     <div class="d-flex justify-content-center" style="margin-top:140px;">
-        {{ form_start(EditProfileFormType) }}
+        {{ form_start(EditProfileFormType, {'attr': {'enctype': 'multipart/form-data'}}) }}
 
             <div class="d-flex"> 
                 {{ form_row(EditProfileFormType.firstName) }} {{ form_row(EditProfileFormType.lastName) }}
@@ -13,11 +18,11 @@
             {{ form_row(EditProfileFormType.plainPassword) }} 
             {{ form_row(EditProfileFormType.dateOfBirth) }}
             {{ form_row(EditProfileFormType.sexe) }}
-            {{ form_row(EditProfileFormType.posterFile) }}
+            {{ form_row(EditProfileFormType.imageFile.file) }}
             {{ form_row(EditProfileFormType._token)}}
 
             <div class="mt-3 d-flex flex-column align-items-center">
-            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check fa-beat"></i></button>
+            <button  aria-label="valider" type="submit" class="btn btn-primary"><i class="fa-solid fa-check fa-beat"></i></button>
             </div>
 
         {{ form_end(EditProfileFormType,{'render_rest': false})}} 
