@@ -1,10 +1,10 @@
-<h1>Hi! Please confirm your email!</h1>
+	<div class="p-2 col-md-4 mx-auto align-items-center">
 
-<p> Confirmez votre mail en cliquant sur le lien <br><br>
-    <a aria-label="confirmer son mail" href="{{ signedUrl|raw }}">Confirmer mon mail</a>.
-    Ce lien expire dans {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
-</p>
+        <h1>Bonjour,</h1>
 
-<p>
-    Merci
-</p>
+        <p> Confirmez votre mail en cliquant sur le <a aria-label="confirmer son mail" href="{{ signedUrl|raw }}">lien</a>.
+            Attention il expire dans {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
+            <br>
+            Merci
+        </p>
+    </div>

@@ -271,4 +271,38 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
        return $this->imageSize;
    }
 
+   public function getUpdatedAt(): ?\DateTimeInterface
+   {
+       return $this->updatedAt;
+   }
+
+   public function setUpdatedAt(?\DateTimeImmutable $updatedAt): self
+   {
+       $this->updatedAt = $updatedAt;
+
+       return $this;
+   }
+
+   public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->email,
+            $this->password,
+        ));
+    }
+
+    public function unserialize($serialized)
+    {
+        list(
+            $this->id,
+            $this->email,
+            $this->password,
+        ) = unserialize($serialized);
+    }
+
+   public function __toString() {
+    return $this->getEmail();
+    }
+
 }

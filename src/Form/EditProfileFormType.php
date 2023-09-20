@@ -54,7 +54,7 @@ class EditProfileFormType extends AbstractType
         ])
         ->add('imageFile', VichImageType::class, array(
             'label' => 'Photo',
-            'required' => false,
+            'required' => false, 
             ))
         ->add('plainPassword', PasswordType::class, [
             'label' => 'Mot de passe',

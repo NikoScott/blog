@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -45,12 +46,6 @@ class RegistrationController extends AbstractController
                 )
             );
 
-            // if($file = $user->getPictureFile()) {
-            //     // $fileName = md5(uniqid()) . '.' . $file->guessExtension();
-            //     // $file->move('./images/user', $fileName);
-                    
-            //     $user->setPictureFile($file);
-            //     }
 
             $entityManager->persist($user);
             $entityManager->flush();
@@ -58,7 +53,7 @@ class RegistrationController extends AbstractController
             // generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
-                    ->from(new Address($this->params->get("app.mail_address"), 'Blog Mail'))
+                    ->from(new Address($this->params->get("app.mail_address"), 'Blog de Nicolas'))
                     ->to($user->getEmail())
                     ->subject('Veuillez confirmer votre mail')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
@@ -76,9 +71,23 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/verify/email', name: 'app_verify_email')]
-    public function verifyUserEmail(Request $request, TranslatorInterface $translator): Response
+    public function verifyUserEmail(Request $request, UserRepository $userRepository, TranslatorInterface $translator): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $id = $request->query->get('id'); // retrieve the user id from the url
+ 
+        // Verify the user id exists and is not null
+        if (null === $id) {
+            return $this->redirectToRoute('app_home');
+        }
+ 
+        $user = $userRepository->find($id);
+ 
+        // Ensure the user exists in persistence
+        if (null === $user) {
+            return $this->redirectToRoute('app_home');
+        }
 
         // validate email confirmation link, sets User::isVerified=true and persists
         try {

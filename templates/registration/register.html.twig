@@ -9,7 +9,7 @@
 		<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
 	{% endfor %}
 
-	<div class="p-2 col-md-8 mx-auto align-items-center" style="margin-top:125px !important">
+	<div class="p-2 col-md-4 mx-auto align-items-center" style="margin-top:125px !important">
 		{{ form_start(registrationForm, {'attr': {'enctype': 'multipart/form-data'}}) }}
 		{{ form_row(registrationForm.firstName) }}
 		{{ form_row(registrationForm.lastName) }}

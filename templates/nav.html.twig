@@ -43,7 +43,7 @@
         {# SI je suis dans la page d'accueil j'affiche ce formulaire  #}
         {% if app.request.attributes.get('_route') == 'app_home' %}
             <form class="d-flex" role="search">
-                <input class="form-control bg-secondary-subtle me-2 custom-placeholder" type="search" id="search-content" style="width:120px; color:#6ea8fe" placeholder="Recherche" aria-label="Recherche">
+                <input class="form-control bg-secondary-subtle me-2 custom-placeholder" name="search" type="search" id="search-content" style="width:120px; color:#6ea8fe" placeholder="Recherche" aria-label="Recherche">
                 <button aria-label="bouton recherche"class="btn btn-outline-info" type="submit"><i class="fa-solid fa-magnifying-glass fa-shake"></i></button>
             </form>
         {% else %}

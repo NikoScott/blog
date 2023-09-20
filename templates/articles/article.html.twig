@@ -1,6 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block meta_description %}{% endblock %}
 {% block title %}
 	{{ article.title }}
 {% endblock %}
@@ -83,10 +82,12 @@ COMMENTAIRES
 			<div class="mt-5 p-2 col-8 mx-auto custom-shadow" style="border-radius:10px">
 				<p class="fst-italic text-end" style="font-size:12px">{{ comment.date|date("d-m-Y") }}</p>
 				<div class="row mb-4 p-1">
-					{% if app.user.picture is not null %}
+					{% if comment.user.imageName is not null %}
 						<div class="col-md-2">
-						<img src="{{ asset('images/user/' ~ app.user.picture) }}" class="align-self-start ms-3" style="width:50px" alt="{{ comment.user.firstName }} {{ comment.user.lastName }}">
+						<img src="{{ asset('images/user/' ~ comment.user.imageName) }}" class="align-self-start ms-3" style="width:50px" alt="{{ comment.user.firstName }} {{ comment.user.lastName }}">
 						</div>
+					{% else %}
+            			<img alt="profil-picture" src="https://picsum.photos/50/50" style="width:50px;object-fit:contain;padding:0;margin-left: 1rem">
 					{% endif %}
 					<div class="col-md-9">
 						<p class="mt-0">{{ comment.user.firstName }} {{ comment.user.lastName }}</p>
