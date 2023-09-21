@@ -66,6 +66,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $username = null;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -301,8 +304,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         ) = unserialize($serialized);
     }
 
-   public function __toString() {
-    return $this->getEmail();
+   public function __toString() 
+   {
+        return $this->getEmail();
     }
+
+   public function getUsername(): ?string
+   {
+       return $this->username;
+   }
+
+   public function setUsername(string $username): static
+   {
+       $this->username = $username;
+
+       return $this;
+   }
 
 }

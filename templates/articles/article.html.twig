@@ -122,7 +122,7 @@ COMMENTAIRES
             			<img alt="profil-picture" src="https://picsum.photos/50/50" style="width:50px;object-fit:contain;padding:0;margin-left: 1rem">
 					{% endif %}
 					<div class="col-md-9">
-						<p class="mt-0">{{ comment.user.firstName }} {{ comment.user.lastName }}</p>
+						<p class="mt-0">{{ comment.user.firstName }} {{ comment.user.lastName|slice(0, 1) }}</p>
 						<p style="word-break:break-all">« {{ comment.comment }} »</p>
 					</div>
 				</div>

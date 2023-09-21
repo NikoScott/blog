@@ -13,21 +13,17 @@
 		{{ form_start(registrationForm, {'attr': {'enctype': 'multipart/form-data'}}) }}
 		{{ form_row(registrationForm.firstName) }}
 		{{ form_row(registrationForm.lastName) }}
+		{{ form_row(registrationForm.username) }}
 		{{ form_row(registrationForm.email) }}
 		{{ form_row(registrationForm.plainPassword) }}
 		{{ form_row(registrationForm.dateOfBirth) }}
 		{{ form_row(registrationForm.sexe) }}
 		{{ form_row(registrationForm.imageFile) }}
-
-
 		{{ form_row(registrationForm.agreeTerms, {label: '<a href="' ~ path("app_cgu") ~ '">' ~ "Accepter nos conditions d'utilisation" ~ '</a>',label_html: true }) }}
-
 		<div class="d-flex justify-content-center">
 			<button  aria-label="s'inscrire" type="submit" class="btn btn-primary">S'inscrire</button>
 			<a aria-label="annuler" class="btn btn-light" href="{{ path('app_home')}}">Retour</a>
 		</div>
-
-
 		{{ form_end(registrationForm) }}
 	</div>
 {% endblock %}
