@@ -57,7 +57,7 @@
 		</div>
 
 		<div class="article  d-flex justify-content-center mb-3">
-			<img class="custom-shadow" src="{{ asset('images/articles/' ~ article.picture ) }}" alt="photo {{ article.category }}"/>
+			<img class="custom-shadow" src="{{ asset('images/articles/' ~ article.picture ) }}" alt="photo {{ article.legendMainPicture }}"/>
 		</div>
 
 {# 
@@ -101,9 +101,9 @@ RESEAUX SOCIAUX
 			{{article.description | raw}}
 		</div>
 
-		<p class="mt-5 mb-3 text-end fst-italic" style="font-size:14px">
+		<a aria-label="Site de l'auteur" class="mt-5 mb-3 text-end fst-italic" style="font-size:14px; color:rgba(173, 181, 189, 0.75)" href="{{ article.authorWebsite }}">
 			{{ article.author }}, le {{ article.date|date('d-m-Y') }} {# permet de parser une date #}
-		</p>
+		</a>
 		<div class="separator mt-5" style="width:30%; height:1px; background:rgba(173,173,173,1)"></div>
 
 
