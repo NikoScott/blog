@@ -25,21 +25,6 @@ class ContactController extends AbstractController
         $form = $this->createForm(ContactType::class, $contact);
         $form->handleRequest($request);
 
-
-        // if ($form->isSubmitted()) {
-
-        //     $errors = $validator->validate($contact);
-
-        //     if (count($errors) > 0) {
-        
-        //         return $this->render('contact/index.html.twig', [
-        //             'contact_form' => $form,
-        //             'errors' => $errors,
-        //         ]);
-        //     }
-        // }
-
-
         if ($form->isSubmitted() && $form->isValid()) {
 
             $contact = $form->getData();

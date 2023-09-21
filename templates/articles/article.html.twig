@@ -4,12 +4,43 @@
 	{{ article.title }}
 {% endblock %}
 
+{% block meta_description %}
+	{# TWITTER #}
+	<meta name="twitter:card" content="photo" />
+	<meta name="twitter:image:alt" content="{{article.title}}">
+	<meta name="twitter:title" content="{{article.title}}">
+	<meta name="twitter:description" content="{{article.chapo}}">
+	<meta name="twitter:image" content="{{ article.picture }}">
+	<meta name="twitter:domain" content="https://blog.nicolaspereire.fr">
+
+	<!-- Open Graph / Facebook -->
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="{{ article.URL }}">
+	<meta property="og:title" content="{{article.title}}">
+	<meta property="og:description" content="{{article.chapo}}">
+	<meta property="og:image" content="{{ article.picture }}">
+
+	{# LINKEDIN #}
+	<meta name="author" content="{{article.author}}">
+	<meta name="publish_date" property="og:publish_date" content="{{ article.date|date('Y-m-d') }}">
+{% endblock %}
+
+
 {# {% form_theme form_comment 'bootstrap_5_layout.html.twig' %} #}
 
 {% block body %}
 
-	<div class="col-md-8 d-flex flex-column mx-auto align-items-center text-body-secondary" style="margin-top:70px">
+{# Fil d'ariane #}
+	<nav class="ms-4" style="--bs-breadcrumb-divider: '>'; margin-top: 100px" aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="{{ path('app_home')}}">Accueil</a></li>
+			<li class="breadcrumb-item"><a href="{{ path('show_articles_by_category', { id : article.category.id}) }}">{{ article.category }}</a></li>
+			<li class="breadcrumb-item active text-primary-emphasis" aria-current="page">{{ article.title }}</li>
+		</ol>
+	</nav>
+	
 
+	<div class="col-md-8 d-flex flex-column mx-auto align-items-center text-body-secondary" style="margin-top:70px">
 		{# Afficher les msg flash#}
 		{% for msg in app.flashes('confirmation') %}
 			<div class="alert alert-success text-center mt-3" id="confirmation-message">
@@ -32,20 +63,21 @@
 {# 
 RESEAUX SOCIAUX
  #}
-		<p class="mt-3 text-body-secondary separator"> Partager cet article </p>
-			<div class="social-links d-flex">
+		<p class="mt-3 text-body-secondary separator"> Partager l'article </p>
+			<div class="d-flex">
 				<div class="reseaux-sociaux">
-					<a aria-label="Partager sur Facebook" href="http://www.facebook.com/sharer.php?u={{ app.request.uri }}&t={{ article.title}}" onclick="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;">
+					<a aria-label="Partager sur Facebook" href="http://www.facebook.com/sharer/sharer.php?u=https://blog.nicolaspereire.fr/article/{{article.id}}" onclick="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;">
 						<img src="{{ asset('build/images/fb_logo.png') }}" alt="fb_logo" class="social-article mb-3">
 					</a>
 				</div>
 				<div class="reseaux-sociaux">
-					<a aria-label="Partager sur Twitter" href="https://twitter.com/share?url={{ app.request.uri }}&t={{ article.title}}" onclick="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;">
+					<a aria-label="Partager sur Twitter" href="https://twitter.com/share?url=https://blog.nicolaspereire.fr/article/{{article.id}}&via=lareponsenumerique&text={{article.title}}"
+                        onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;">
 						<img src="{{ asset('build/images/twitter_logo.png') }}" alt="twitter_logo" class="social-article mb-3">
 					</a>
 				</div>
 				<div class="reseaux-sociaux">
-					<a aria-label="Partager sur LinkedIn" href="https://www.linkedin.com/shareArticle?mini=true&url={{ app.request.uri }}&t={{ article.title}}" onclick="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;">
+					<a aria-label="Partager sur LinkedIn" href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.nicolaspereire.fr/article/{{article.id}}" onclick="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;">
 						<img src="{{ asset('build/images/linkedin_logo.png') }}" alt="linkedin_logo" class="social-article mb-3">
 					</a>
 				</div>

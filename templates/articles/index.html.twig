@@ -1,57 +1,76 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nos articles{% endblock %}
+{% block title %}Nos articles
+{% endblock %}
 
 {% block body %}
 
 	<div class="side-bar custom-shadow mt-1 ps-1 pt-4">
-	    
+
 		<div class="list-categories">
 			<ul>
 				{% for category in listCategories %}
 					{# <div class="separator" style="height:2px;background:rgba(255,255,255, 0.05);"> </div> #}
 					<li class="my-3">
 						<a aria-label="articles par catégorie" class="text-primary-emphasis" href="{{ path('show_articles_by_category', {id : category.id}) }}">
-							{{category.name}} </a>
+							{{category.name}}
+						</a>
 					</li>
 				{% endfor %}
-				<div class="separator " style="height:2px;background:rgba(255,255,255, 0.05);"> </div>
+				<div class="separator " style="height:2px;background:rgba(255,255,255, 0.05);"></div>
 			</ul>
 
-{# Possibilité d'ajouter une catégorie sans passer par le back office #}
+			{# Possibilité d'ajouter une catégorie sans passer par le back office #}
 			{# {% if is_granted('ROLE_ADMIN') %}      
-			<a aria-label="ajouter une catégorie" href="{{path('ajout_category')}}" class="ms-4 btn btn-warning"> Creer une nouvelle catégorie </a>
-    		{% endif %} #}
+									<a aria-label="ajouter une catégorie" href="{{path('ajout_category')}}" class="ms-4 btn btn-warning"> Creer une nouvelle catégorie </a>
+						    		{% endif %} #}
 		</div>
 	</div>
 
-    <div class="main-content px-5">
+	<div class="main-content px-5">
 
-    <h1 class="mb-5 text-primary-emphasis"> Nos articles liés à la catégorie : <span class="text-primary">{{ category }}</span> </h1>
+		<h1 class="mb-5 text-primary-emphasis">
+			Nos articles liés à la catégorie :
+			<span class="text-primary">{{ category }}</span>
+		</h1>
 
-        {% for article in listArticles %}
+		{% for article in listArticles %}
 
-				<div class="d-flex flex-column" style="width:100%;">
-					<div class="articleMain d-flex my-3 cursor-pointer">
-						<a aria-label="article par id" class="flex-column text-decoration-none text-reset" href="{{ path('show_article_by_id', { id : article.id }) }}">
-							<img id="imgArticle" class="custom-shadow me-3" src="{{ asset('images/articles/' ~ article.picture ) }}" alt="photo-article"/>
+			<div class="d-flex flex-column" style="width:100%;">
+				<div class="articleMain d-flex my-3 cursor-pointer">
+					<a aria-label="article par id" class="flex-column text-decoration-none text-reset" href="{{ path('show_article_by_id', { id : article.id }) }}">
+						<img id="imgArticle" class="custom-shadow me-3" src="{{ asset('images/articles/' ~ article.picture ) }}" alt="photo-article"/>
+					</a>
+					<div class="text-body-secondary mb-1 fst-italic ps-2" style="font-size:12px">
+						<a aria-label="article par catégorie" href="{{ path('show_articles_by_category', { id : article.category.id}) }}">
+							{{ article.category }}
+							-
 						</a>
-						<div class="text-body-secondary mb-1 fst-italic ps-2" style="font-size:12px">
-							<a aria-label="article par catégorie" href="{{ path('show_articles_by_category', { id : article.category.id}) }}"> {{ article.category }} - </a> {{ article.date|date("d-m-Y") }}
-							<a aria-label="article par id" href="{{ path('show_article_by_id', { id : article.id }) }}">
-								<h2 class="h3 fst-normal text-primary-emphasis">{{ article.title | raw}}</h2>
-								<p id="catchPhrase" class="mb-2 fst-normal text-body-secondary" style="font-size:16px"> {{ article.catchPhrase }} </p>
-							</a>
-							<div id="social" class="d-flex flex-column fst-normal">
-								<p class="text-body-secondary mb-1"> Partager l'article : </p>
-								<div class="">
-									<a aria-label="partager sur facebook" href="http://www.facebook.com/sharer.php?u={{ app.request.uri }}&t={{ article.title}}" onclick="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;">
+						{{ article.date|date("d-m-Y") }}
+						<a aria-label="article par id" href="{{ path('show_article_by_id', { id : article.id }) }}">
+							<h2 class="h3 fst-normal text-primary-emphasis">{{ article.title | raw}}</h2>
+							<p id="catchPhrase" class="mb-2 fst-normal text-body-secondary" style="font-size:16px">
+								{{ article.catchPhrase }}
+							</p>
+						</a>
+
+						{# RESAUX SOCIAUX #}
+						{#  #}
+						<div class="d-flex flex-column fst-normal">
+							<p class="text-body-secondary mb-1"> Partager l'article </p>
+							<div class="d-flex">
+								<div class="reseaux-sociaux p-1">
+									<a aria-label="Partager sur Facebook" href="http://www.facebook.com/sharer/sharer.php?u=https://blog.nicolaspereire.fr/article/{{article.id}}" onclick="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;">
 										<img src="{{ asset('build/images/fb_logo.png') }}" alt="fb_logo" class="social mb-3">
 									</a>
-									<a aria-label="partager sur twitter" href="https://twitter.com/share?url={{ app.request.uri }}&t={{ article.title}}" onclick="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;">
+								</div>
+								<div class="reseaux-sociaux p-1">
+									<a aria-label="Partager sur Twitter" href="https://twitter.com/share?url=https://blog.nicolaspereire.fr/article/{{article.id}}&via=lareponsenumerique&text={{article.title}}" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;">
 										<img src="{{ asset('build/images/twitter_logo.png') }}" alt="twitter_logo" class="social mb-3">
 									</a>
-									<a aria-label="partager sur linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url={{ app.request.uri }}&t={{ article.title}}" onclick="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;">
+								</div>
+								<div class="reseaux-sociaux p-1">
+									<a aria-label="Partager sur LinkedIn" href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.nicolaspereire.fr/article/{{article.id}}" onclick="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;">
 										<img src="{{ asset('build/images/linkedin_logo.png') }}" alt="linkedin_logo" class="social mb-3">
 									</a>
 								</div>
@@ -59,9 +78,10 @@
 						</div>
 					</div>
 				</div>
-				<div class="separator mt-5 mb-5" style="height:2px;background:rgba(255,255,255, 0.05);"></div>
+			</div>
+			<div class="separator mt-5 mb-5" style="height:2px;background:rgba(255,255,255, 0.05);"></div>
 
-        {% endfor %}
-    
-    </div>
+		{% endfor %}
+
+	</div>
 {% endblock %}

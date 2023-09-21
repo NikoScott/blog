@@ -45,18 +45,11 @@ class ProfileController extends AbstractController
         
         if($form->isSubmitted() && $form->isValid()) {
         
-            // if ($user->getImageFile()) {
-            //     $fileToRemove = $user->getImageFile();
-                          
-            //     if (file_exists($fileToRemove)) {
-            //     dd('dfrrer');
-
-            //         unlink($fileToRemove); // Supprime le fichier
-            //     }
-            // }
-
             $entityManager->persist($user);
             $entityManager->flush();
+
+            // To avoid serialization error
+            $user->setImageFile(null);
 
             $this->addFlash('confirmation', 'Votre profil a bien été modifié');
             return $this->redirectToRoute('app_profile');

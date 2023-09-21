@@ -42,13 +42,13 @@
 
         {# SI je suis dans la page d'accueil j'affiche ce formulaire  #}
         {% if app.request.attributes.get('_route') == 'app_home' %}
-            <form class="d-flex" role="search">
+            <form class="d-flex justify-content-center my-1" role="search">
                 <input class="form-control bg-secondary-subtle me-2 custom-placeholder" name="search" type="search" id="search-content" style="width:120px; color:#6ea8fe" placeholder="Recherche" aria-label="Recherche">
-                <button aria-label="bouton recherche"class="btn btn-outline-info" type="submit"><i class="fa-solid fa-magnifying-glass fa-shake"></i></button>
+                <button aria-label="bouton recherche"class="btn btn-outline-info" type="submit" id="btn-search"><i  class="fa-solid fa-magnifying-glass fa-shake"></i></button>
             </form>
         {% else %}
         {# sinon j'en affiche un autre pas asynchrone  #}
-            <form class="d-flex" role="search" action="/search/articles" method="POST">
+            <form class="d-flex justify-content-center my-1" role="search" action="/search/articles" method="POST">
                 <input class="form-control bg-secondary-subtle me-2 custom-placeholder" name="search" type="search" style="width:120px; color:#6ea8fe" placeholder="Recherche" aria-label="Recherche">
                 <button  aria-label="recherche"class="btn btn-outline-info" type="submit"><i class="fa-solid fa-magnifying-glass fa-shake"></i></button>
             </form>
