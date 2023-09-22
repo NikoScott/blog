@@ -43,24 +43,41 @@
 </div>
 
 
-{# Si l'utilisateur a déjà ecrit des commentaires ils seront affichés dessous #}
-{# Sinon rien #}
-{% if comments is not empty %}
-    <h3 class="text-center mt-4 mb-4"> Vos récents commentaires :</h3>
-    {% for comment in recentComment %}
-        <div class="card bg-secondary-subtle text-emphasis-secondary mb-2 mx-auto col-md-6 ">
-            <p class="fst-italic" style="font-size:14px">{{ comment.date|date("d-m-Y") }}</p>
-            <a aria-label="{{ comment.article.title }}" class="mb-1" href="{{ path('show_article_by_id', { id : comment.article.id }) }}">{{ comment.article.title }}</a>
-            <p class="ms-4"> « {{ comment.comment }} » </p>
-        </div>
+<div class="">
+{# COMMENTAIRES SI EXISTANTS #}
+    <div>
+    {% if comments is not empty %}
+        <h3 class="text-center mt-4 mb-4"> Vos récents commentaires :</h3>
+        {% for comment in recentComment %}
+            <div class="card bg-secondary-subtle text-emphasis-secondary mb-2 mx-auto col-md-6 ">
+                <p class="fst-italic" style="font-size:14px">{{ comment.date|date("d-m-Y") }}</p>
+                <a aria-label="{{ comment.article.title }}" class="mb-1" href="{{ path('show_article_by_id', { id : comment.article.id }) }}">{{ comment.article.title }}</a>
+                <p class="ms-4"> « {{ comment.comment }} » </p>
+            </div>
 
-        <div class="d-flex mx-auto col-md-6 mb-3 justify-content-center">
-            <a aria-label="Modifier" href="{{path('modify_comment', { id : comment.id} )}}" class="btn btn-dark"> Modifier </a>
-            <a aria-label="Supprimer" href="{{path('delete_comment', { id : comment.id} )}}" class="btn btn-dark"> Supprimer </a>
-        </div>
+            <div class="d-flex mx-auto col-md-6 mb-3 justify-content-center">
+                <a aria-label="Modifier" href="{{path('modify_comment', { id : comment.id} )}}" class="btn btn-dark"> Modifier </a>
+                <a aria-label="Supprimer" href="{{path('delete_comment', { id : comment.id} )}}" class="btn btn-dark"> Supprimer </a>
+            </div>
+        {% endfor %}
+    {% endif %}
+    </div>
 
-    {% endfor %}
-{% endif %}
+    {# ARTICLES ENREGISTRES SI ENREGISTRE #}
+    <div>
+        {# {% if articleSave is not empty %} #}
+        <h3 class="text-center mt-4 mb-4"> Vos articles enregistrés :</h3>
+            {% for comment in recentComment %}
+            <div class="card bg-secondary-subtle text-emphasis-secondary mb-2 mx-auto col-md-6 ">
+                <p class="fst-italic" style="font-size:14px">{{ comment.date|date("d-m-Y") }}</p>
+                <a aria-label="{{ comment.article.title }}" class="mb-1" href="{{ path('show_article_by_id', { id : comment.article.id }) }}">{{ comment.article.title }}</a>
+                <p class="ms-4"> « {{ comment.comment }} » </p>
+            </div>
+        {% endfor %}
+
+    </div>
+
+</div>
 
 
 

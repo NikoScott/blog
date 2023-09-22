@@ -108,8 +108,10 @@ RESEAUX SOCIAUX
 
 
 {# 
-COMMENTAIRES 
+COMMENTAIRES EXISTANTS 
 #}
+
+	<div class="">
 		{% for comment in comments %}
 			<div class="mt-5 p-2 col-8 mx-auto custom-shadow" style="border-radius:10px">
 				<p class="fst-italic text-end" style="font-size:12px">{{ comment.date|date("d-m-Y") }}</p>
@@ -122,7 +124,8 @@ COMMENTAIRES
             			<img alt="profil-picture" src="https://picsum.photos/50/50" style="width:50px;object-fit:contain;padding:0;margin-left: 1rem">
 					{% endif %}
 					<div class="col-md-9">
-						<p class="mt-0">{{ comment.user.firstName }} {{ comment.user.lastName|slice(0, 1) }}</p>
+						{# <p class="mt-0">{{ comment.user.firstName }} {{ comment.user.lastName|slice(0, 1) }}</p> #}
+						<p class="mt-0">{{ comment.user.username }}</p>
 						<p style="word-break:break-all">« {{ comment.comment }} »</p>
 					</div>
 				</div>
@@ -130,6 +133,12 @@ COMMENTAIRES
 		{% endfor %}
 
 
+
+
+
+{# 
+NOUVEAUX COMMENTAIRES 
+#}
 			<div class="mt-5" style="width:80%">
 				{{ form_start(form_comment) }}
 					{{ form_row(form_comment.comment) }}

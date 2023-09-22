@@ -34,6 +34,12 @@ class RegistrationFormType extends AbstractType
                 'placeholder' => 'Votre nom'),
             'label' => 'Nom'
         ))
+        ->add('username', TypeTextType::class, array(
+            'label_attr' => ['class' => 'text-less-grey'],
+            'attr' => array(
+                'placeholder' => 'Choisissez un pseudo'),
+            'label' => 'Pseudo'
+        ))
         ->add('dateOfBirth', BirthdayType::class, array(
             'label_attr' => ['class' => 'text-less-grey'],
             'attr' => array(

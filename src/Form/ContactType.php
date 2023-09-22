@@ -37,6 +37,15 @@ class ContactType extends AbstractType
                     'placeholder' => 'Entrer votre email'
                 )
             ])
+            ->add('object', ChoiceType::class, [
+                'label' => 'Que nous vaut le plaisir ?',
+                'choices' => [                    
+                    "Devenir rédacteur d'article" => 'Choix 1',
+                    "Sugestions" => 'Choix 2',
+                    "Problèmes" => 'Choix 3',
+                    "Autres" => 'Choix 4'
+                ]
+            ])
             ->add('message', TextareaType::class, [
                 'label' => 'Votre message',
                 'attr' => array(
@@ -47,20 +56,12 @@ class ContactType extends AbstractType
                 ]),
                 ],
             ])
-            ->add('object', ChoiceType::class, [
-                'label' => 'Que nous vaut le plaisir?',
-                'choices' => [                    
-                    'Problèmes de compte' => 'Choix 1',
-                    "Problèmes d'article" => 'Choix 2' ,
-                    'Autres' => 'Choix 3'
-                ]
-            ])
-            ->add('phone', TextType::class, [
-                'label' => 'Votre numéro de téléphone',
-                'attr' => array(
-                    'placeholder' => 'Entrer votre numéro de téléphone'
-                ),
-            ])
+            // ->add('phone', TextType::class, [
+            //     'label' => 'Numéro de téléphone',
+            //     'attr' => array(
+            //         'placeholder' => 'Entrer votre numéro de téléphone'
+            //     ),
+            // ])
             ->add('save', SubmitType::class, [
                 'label' => 'Envoyer',
                 'attr' => ['class' => 'save btn-primary'],
