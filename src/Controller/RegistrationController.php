@@ -46,6 +46,15 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            $usernameExist = $entityManager->getRepository(User::class)->findOneBy(['username' => $user->getUsername()]);
+
+            if ($usernameExist) {
+    
+                return $this->redirectToRoute('app_register', [
+                    'request' => $request,
+                    'user' => $user,
+                ]);
+            };
 
             $entityManager->persist($user);
             $entityManager->flush();

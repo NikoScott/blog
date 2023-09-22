@@ -18,6 +18,37 @@ import './bootstrap';
 // loads the jquery package from node_modules
 import $ from 'jquery';
 
+//////
+// SLIDE
+$(document).ready(function() {
+    var $firstElement = $('.first-element'); // Sélectionnez le premier élément spécifiquement
+    var $slideElements = $('.slide-from-bottom:not(.first-element)'); // Sélectionnez les autres éléments
+
+    $firstElement.addClass('active'); // Activez le premier élément immédiatement
+
+    $(window).on('scroll', function() {
+        $slideElements.each(function() {
+            var top_of_element = $(this).offset().top;
+            var bottom_of_window = $(window).scrollTop() + $(window).height();
+            var offset = -200; // Ajustez cette valeur pour déclencher l'animation plus tôt
+
+            if (top_of_element < bottom_of_window - offset) {
+                $(this).addClass('active');
+            }
+        });
+    });
+});
+
+
+
+
+
+
+
+  
+  
+  
+
 
 
 //////

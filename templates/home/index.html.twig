@@ -29,8 +29,7 @@
 
 	<div
 		class="main-content px-5">
-		{# Afficher les messages flash #}
-		{% for notice in app.flashes('confirmation') %}
+		{#"alert alert-success text-center		{% for notice in app.flashes('confirmation') %}
 			<div class="alert alert-success text-center mt-3" id="confirmation-message">
 				{{ notice }}
 			</div>
@@ -42,13 +41,13 @@
 				{% endif %} #}
 
 
-		<h1 class="mb-5 text-primary">
+		<h1 class="mb-3 text-primary">
 			Nos derniers articles
 		</h1>
 
 		{% for article in listArticles %}
-			<div class="d-flex flex-column" style="width:100%;">
-				<div class="articleMain d-flex my-3 cursor-pointer">
+			<div class="d-flex flex-column  {% if loop.first %}first-element{% endif %} slide-from-bottom" style="width:100%;">
+				<div class="articleMain d-flex my-3 cursor-pointer ">
 					<a aria-label="article par id" class="flex-column text-decoration-none text-reset" href="{{ path('show_article_by_id', { id : article.id }) }}">
 						<img id="imgArticle" class="custom-shadow me-3" src="{{ asset('images/articles/' ~ article.picture ) }}" alt="photo-article"/>
 					</a>
