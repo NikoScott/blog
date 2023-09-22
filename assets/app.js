@@ -21,10 +21,20 @@ import $ from 'jquery';
 //////
 // SLIDE
 $(document).ready(function() {
-    var $firstElement = $('.first-element'); // Sélectionnez le premier élément spécifiquement
+    var $firstElements = $('.first-element'); // Sélectionnez les trois premiers éléments
     var $slideElements = $('.slide-from-bottom:not(.first-element)'); // Sélectionnez les autres éléments
 
-    $firstElement.addClass('active'); // Activez le premier élément immédiatement
+    // Fonction pour activer les trois premiers éléments avec un délai de 0,5 seconde entre chaque élément
+    function animateFirstElements(index) {
+        if (index < $firstElements.length) {
+            setTimeout(function() {
+                $firstElements.eq(index).addClass('active');
+                animateFirstElements(index + 1);
+            }, 500); // Délai de 0,5 seconde (500 millisecondes)
+        }
+    }
+
+    animateFirstElements(0); // Démarrez l'animation des trois premiers éléments
 
     $(window).on('scroll', function() {
         $slideElements.each(function() {

@@ -46,7 +46,7 @@
 		</h1>
 
 		{% for article in listArticles %}
-			<div class="d-flex flex-column  {% if loop.first %}first-element{% endif %} slide-from-bottom" style="width:100%;">
+			<div class="d-flex flex-column  {% if loop.index <= 3 %}first-element{% endif %} slide-from-bottom" style="width:100%;">
 				<div class="articleMain d-flex my-3 cursor-pointer ">
 					<a aria-label="article par id" class="flex-column text-decoration-none text-reset" href="{{ path('show_article_by_id', { id : article.id }) }}">
 						<img id="imgArticle" class="custom-shadow me-3" src="{{ asset('images/articles/' ~ article.picture ) }}" alt="photo-article"/>
