@@ -1,6 +1,10 @@
 @import "~bootstrap/scss/bootstrap";
 
 // Common css
+*, html, body {
+    overflow-x:hidden !important /*pour supprimer le defilement horizontal*/
+    }
+
 .slide-from-bottom {
     transform: translateX(100%);
     opacity: 0;
