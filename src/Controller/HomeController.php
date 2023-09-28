@@ -14,15 +14,14 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
+
+    // Cette fonction renvoie tous les articles et toutes les catégories en bdd sur la page d'accueil
+
     #[Route('/', name: 'app_home')]
     public function index(EntityManagerInterface $entityManager, PaginatorInterface $paginator, Request $request): Response // le retour de la méthode index() est un objet de type réponse
     // index() va intercepter une requête et retourner une réponse
     // en php 8 on peut typer le retour des méthodes
     {   
-        // elle retourne l'appel à la méthode render()
-        // render() => renvoit une vue
-        // avec un tableau de paramètres
-
         // j'ai récupéré le repository de la classe Articles
         // et j'ai appelé la méthode findAll()
         $articles = $entityManager->getRepository(Articles::class)->findBy([], ['date' => 'DESC']);

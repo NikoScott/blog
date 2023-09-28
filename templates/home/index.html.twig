@@ -45,6 +45,7 @@
 			Nos derniers articles
 		</h1>
 
+{# AFFICHE TOUS LES ARTICLES EN BDD #}
 		{% for article in listArticles %}
 			<div class="d-flex flex-column  {% if loop.index <= 3 %}first-element{% endif %} slide-from-bottom" style="width:100%;">
 				<div class="articleMain d-flex my-3 cursor-pointer ">
@@ -61,9 +62,7 @@
 							<h2 class="h3 fst-normal text-primary-emphasis">{{ article.title | raw}}</h2>
 							{# raw : interprete les balises html #}
 						</a>
-						<p id="catchPhrase" class="mb-2 fst-normal text-body-secondary" style="font-size:16px">
-							{{ article.catchPhrase }}
-						</p>
+						<p id="catchPhrase" class="mb-2 fst-normal text-body-secondary" style="font-size:16px">{{ article.catchPhrase }} </p>
 
 						{# RESAUX SOCIAUX #}
 						{#  #}

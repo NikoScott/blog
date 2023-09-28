@@ -31,6 +31,9 @@ $(document).ready(function() {
                 $firstElements.eq(index).addClass('active');
                 animateFirstElements(index + 1);
             }, 500); // Délai de 0,5 seconde (500 millisecondes)
+        } else {
+            // Désactivez le défilement horizontal une fois que les éléments ont été animés
+            $('body').css('overflow-x', 'hidden');
         }
     }
 
@@ -42,7 +45,7 @@ $(document).ready(function() {
             var bottom_of_window = $(window).scrollTop() + $(window).height();
             var offset = -200; // Ajustez cette valeur pour déclencher l'animation plus tôt
 
-            if (top_of_element < bottom_of_window - offset) {
+            if (top_of_element < bottom_of_window - offset && !$(this).hasClass('active')) {
                 $(this).addClass('active');
             }
         });
@@ -50,14 +53,6 @@ $(document).ready(function() {
 });
 
 
-
-
-
-
-
-  
-  
-  
 
 
 
