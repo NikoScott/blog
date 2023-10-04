@@ -41,7 +41,7 @@ class ContactType extends AbstractType
                 'label' => 'Que nous vaut le plaisir ?',
                 'choices' => [                    
                     "Devenir rédacteur d'article" => 'Choix 1',
-                    "Sugestions" => 'Choix 2',
+                    "Suggestions" => 'Choix 2',
                     "Problèmes" => 'Choix 3',
                     "Autres" => 'Choix 4'
                 ]
