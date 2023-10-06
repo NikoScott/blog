@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Articles;
 use App\Entity\Category;
 
+use App\Entity\Newsletter;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,6 +23,24 @@ class HomeController extends AbstractController
     // index() va intercepter une requête et retourner une réponse
     // en php 8 on peut typer le retour des méthodes
     {   
+
+        // Souscription à la newsletter //
+        if (!empty($request->request->get('newsletter'))) {
+            
+            $email = strtolower($request->request->get('newsletter'));
+            $frequence = $request->request->get('frequence');
+
+            $newsletter = new Newsletter();
+            $newsletter->setEmail($email);
+            $newsletter->setFrequence($frequence);
+
+            $entityManager->persist($newsletter);
+            $entityManager->flush();
+
+            $this->addFlash('confirmation', 'Vous avez bien été inscrit à notre newsletter !');
+
+        }
+
         // j'ai récupéré le repository de la classe Articles
         // et j'ai appelé la méthode findAll()
         $articles = $entityManager->getRepository(Articles::class)->findBy([], ['date' => 'DESC']);

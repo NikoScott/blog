@@ -85,7 +85,7 @@ RESEAUX SOCIAUX
 
 {# SEULEMENT POUR ADMIN sans passer par le back office #}
 
-        {# <div class="mt-4">
+        <div class="mt-4">
         {% if is_granted('ROLE_ADMIN') %}
 			<a aria-label="Modifier" href="{{path('modify_article', { id : article.id} )}}" class="btn btn-warning">
 				Modifier
@@ -94,7 +94,7 @@ RESEAUX SOCIAUX
 				Supprimer
 			</a>
 		{% endif %}
-        </div> #}
+        </div>
 
 
 		<div id="description" class="mt-5" style="width:90%">
@@ -111,7 +111,7 @@ RESEAUX SOCIAUX
 COMMENTAIRES EXISTANTS 
 #}
 
-	<div class="">
+	<div class="col-md-8">
 		{% for comment in comments %}
 			<div class="mt-5 p-2 col-8 mx-auto custom-shadow" style="border-radius:10px">
 				<p class="fst-italic text-end" style="font-size:12px">{{ comment.date|date("d-m-Y") }}</p>
@@ -139,7 +139,7 @@ COMMENTAIRES EXISTANTS
 {# 
 NOUVEAUX COMMENTAIRES 
 #}
-			<div class="mt-5" style="width:80%">
+			<div class="mt-5 mx-auto" style="width:80%">
 				{{ form_start(form_comment) }}
 					{{ form_row(form_comment.comment) }}
 					{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}

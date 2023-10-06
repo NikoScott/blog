@@ -21,9 +21,9 @@
 					</li>
 				{% endfor %}
 			</ul>
-			{# {% if is_granted('ROLE_ADMIN') %}      
+			{% if is_granted('ROLE_ADMIN') %}      
 						<a aria-label="ajouter une catégorie" href="{{path('ajout_category')}}" class="ms-4 btn btn-warning"> Creer une nouvelle catégorie </a>
-			    		{% endif %} #}
+			    		{% endif %}
 		</div>
 	</div>
 
@@ -36,9 +36,9 @@
 		{% endfor %}
 
 		{# Permet d'ajouter un article sans passer par le back office #}
-		{# {% if is_granted('ROLE_ADMIN') %}      
+		{% if is_granted('ROLE_ADMIN') %}      
 					<a aria-label="creer un nouvel article" href="{{path('ajout_article')}}" class="btn btn-warning mb-3"> Creer un nouvel article </a>
-				{% endif %} #}
+				{% endif %}
 
 
 		<h1 class="mb-3 text-primary">
@@ -71,17 +71,17 @@
 							<div class="d-flex">
 								<div class="reseaux-sociaux p-1">
 									<a aria-label="Partager sur Facebook" href="http://www.facebook.com/sharer/sharer.php?u=https://blog.nicolaspereire.fr/article/{{article.id}}" onclick="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;">
-										<img src="{{ asset('build/images/fb_logo.png') }}" alt="fb_logo" class="social mb-3">
+										<img src="{{ asset('build/fb_logo.png') }}" alt="fb_logo" class="social mb-3">
 									</a>
 								</div>
 								<div class="reseaux-sociaux p-1">
 									<a aria-label="Partager sur Twitter" href="https://twitter.com/share?url=https://blog.nicolaspereire.fr/article/{{article.id}}&via=lareponsenumerique&text={{article.title}}" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;">
-										<img src="{{ asset('build/images/x_logo.png') }}" alt="twitter_logo" class="social mb-3">
+										<img src="{{ asset('build/x_logo.png') }}" alt="twitter_logo" class="social mb-3">
 									</a>
 								</div>
 								<div class="reseaux-sociaux p-1">
 									<a aria-label="Partager sur LinkedIn" href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.nicolaspereire.fr/article/{{article.id}}" onclick="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;">
-										<img src="{{ asset('build/images/linkedin_logo.png') }}" alt="linkedin_logo" class="social mb-3">
+										<img src="{{ asset('build/linkedin_logo.png') }}" alt="linkedin_logo" class="social mb-3">
 									</a>
 								</div>
 							</div>
@@ -96,6 +96,12 @@
 		<div class="navigation">
 			{{ knp_pagination_render(listArticles) }}
 		</div>
+
+		{# NEWSLETTER  #}
+
+		{{ render(controller('App\\Controller\\NewsLetterController::index')) }}
+
+
 	</div>
 
 {% endblock %}
