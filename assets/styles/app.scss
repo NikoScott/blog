@@ -137,12 +137,12 @@ a {
         flex-direction: column !important;
         height: inherit !important;
 
-        #imgArticle {
-            width: 330px;
+        .imgArticle {
+            width: 25rem;
             height: auto;
             border-radius: 10px;
             display: flex;
-            position: relative;
+            // position: relative;
             margin: auto !important;
             margin-bottom: 2rem !important;
         }

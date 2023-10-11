@@ -50,10 +50,10 @@
 
 {# AFFICHE TOUS LES ARTICLES EN BDD #}
 		{% for article in listArticles %}
-			<div class="d-flex flex-column {% if loop.index <= 3 %}first-element{% endif %} slide-from-bottom" style="width:100%;">
-				<div class="articleMain d-flex flex-column flex-wrap my-3 cursor-pointer" style="height:16rem">
-					<a aria-label="article par id" class="flex-column text-decoration-none text-reset" href="{{ path('show_article_by_id', { id : article.id }) }}">
-						<img id="imgArticle" class="custom-shadow me-3" src="{{ asset('images/articles/' ~ article.picture ) }}" alt="photo-article"/>
+			<div class="d-flex  {% if loop.index <= 3 %}first-element{% endif %} slide-from-bottom" style="width:100%;">
+				<div class="articleMain d-flex   my-3 cursor-pointer" style="">
+					<a aria-label="article par id" class=" text-decoration-none text-reset" href="{{ path('show_article_by_id', { id : article.id }) }}">
+						<img class="custom-shadow me-3 imgArticle" src="{{ asset('images/articles/' ~ article.picture ) }}" alt="photo-article"/>
 					</a>
 			{# ICON FOR LIKE AND SAVE #}
 					{# <div class="d-flex justify-content-end me-3">
@@ -76,7 +76,7 @@
 							<h2 class="h3 fst-normal text-primary-emphasis">{{ article.title | raw}}</h2>
 							{# raw : interprete les balises html #}
 						</a>
-						<p id="catchPhrase" class="mb-2 fst-normal text-body-secondary" style="font-size:16px">{{ article.catchPhrase }} </p>
+						<p class="mb-2 fst-normal text-body-secondary" style="font-size:16px; word-wrap: break-word;">{{ article.catchPhrase }} </p>
 
 
 						{# RESAUX SOCIAUX #}

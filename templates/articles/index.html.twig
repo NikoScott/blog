@@ -3,27 +3,26 @@
 {% block title %}Nos articles
 {% endblock %}
 
+{# PAGE POUR ARTICLE DUNE CATEGORIE #}
+
+
+
 {% block body %}
 
-	<div class="side-bar custom-shadow mt-1 ps-1 pt-4">
-
+{# AFFICHE TOUTES LES CATEGORIES EN BDD #}
+	<div class="side-bar side-shadow mt-1 ps-1 pt-4">
 		<div class="list-categories">
 			<ul>
 				{% for category in listCategories %}
-					{# <div class="separator" style="height:2px;background:rgba(255,255,255, 0.05);"> </div> #}
 					<li class="my-3">
-						<a aria-label="articles par catégorie" class="text-primary-emphasis" href="{{ path('show_articles_by_category', {id : category.id}) }}">
-							{{category.name}}
-						</a>
+						<a aria-label="article par catégorie" class="text-primary-emphasis" href="{{ path('show_articles_by_category', {id : category.id}) }}"> {{category.name}}</a>
+						<div class="separator mt-3" style="height:2px;background:rgba(255,255,255, 0.05);"></div>
 					</li>
 				{% endfor %}
-				<div class="separator " style="height:2px;background:rgba(255,255,255, 0.05);"></div>
 			</ul>
-
-			{# Possibilité d'ajouter une catégorie sans passer par le back office #}
-			{# {% if is_granted('ROLE_ADMIN') %}      
-									<a aria-label="ajouter une catégorie" href="{{path('ajout_category')}}" class="ms-4 btn btn-warning"> Creer une nouvelle catégorie </a>
-						    		{% endif %} #}
+			{% if is_granted('ROLE_ADMIN') %}      
+					<a aria-label="ajouter une catégorie" href="{{path('ajout_category')}}" class="ms-4 btn btn-warning"> Creer une nouvelle catégorie </a>
+			{% endif %}
 		</div>
 	</div>
 
@@ -39,7 +38,7 @@
 			<div class="d-flex flex-column" style="width:100%;">
 				<div class="articleMain d-flex my-3 cursor-pointer">
 					<a aria-label="article par id" class="flex-column text-decoration-none text-reset" href="{{ path('show_article_by_id', { id : article.id }) }}">
-						<img id="imgArticle" class="custom-shadow me-3" src="{{ asset('images/articles/' ~ article.picture ) }}" alt="photo-article"/>
+						<img class="custom-shadow me-3 imgArticle" src="{{ asset('images/articles/' ~ article.picture ) }}" alt="photo-article"/>
 					</a>
 					<div class="text-body-secondary mb-1 fst-italic ps-2" style="font-size:12px">
 						<a aria-label="article par catégorie" href="{{ path('show_articles_by_category', { id : article.category.id}) }}">
