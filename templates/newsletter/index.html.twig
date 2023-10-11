@@ -1,32 +1,26 @@
-            {# NEWSLETTER  #}
-            <div class="row mx-auto mb-5 px-5 pt-5" id="newsletter">
-
-                <div class="col-md-8">
-                    <h2 class="text-primary pt-5 pb-3"> Recevez par email toute l’actualité du digital </h2>
-                        <form method="POST">
-                            <div class="d-flex pb-3">
-                                <input type="text" placeholder="Entrez votre adresse email" class="col-8 newsletter px-5 py-3" name="newsletter" >
-                                <input class="text-primary-emphasis px-3 bg-dark" type="submit" value="JE M'INSCRIS">
-                            </div>
-                            <div class="d-flex pb-3">
-                                <div class="mx-3">
-                                    <input type="radio" id="test1" name="frequence" value="1" checked>
-                                    <label class="text-primary-emphasis" for="test1">Chaque matin</label>
-                                </div>
-                                <div class="mx-3">
-                                    <input type="radio" id="test2" name="frequence" value="2">
-                                    <label class="text-primary-emphasis" for="test2">Chaque semaine</label>
-                                </div>
-                            </div>
-
-                            <p class="text-primary-emphasis fst-italic"> En cliquant sur "S'inscrire", vous acceptez les CGU ainsi que notre politique de confidentialité décrivant la finalité des traitements de vos données personnelles. </p>
-
-                        </form>
-
+{# NEWSLETTER  #}
+<h2 class="text-primary ms-4"> Recevez par mail toute l’actualité du blog </h2>
+<div class="d-flex" id="newsletter">
+    <div class="d-flex flex-wrap justify-content-center">
+            <form method="POST" style="width:60%">
+                <div class="d-flex">
+                    <input type="text" placeholder="Entrez votre adresse email" class="col-8 newsletter p-2" name="newsletter" >
+                    <input class="text-primary-emphasis bg-dark" type="submit" value="JE M'INSCRIS">
                 </div>
-
-                {# <div class="d-flex col-md-4 align-items-end illustration-part">
-                    <img alt="Abonnez-vous à la newsletter" title="Newsletter du blog de Nicolas" class="" src="{{ asset('public/build/newsletter.png') }}">
-                </div> #}
-
-            </div>
+                <div class="d-flex my-2">
+                    <div class="mx-3">
+                        <input type="radio" id="test1" name="frequence" value="1" checked>
+                        <label class="text-primary-emphasis" for="test1">Chaque semaine</label>
+                    </div>
+                    <div class="mx-3">
+                        <input type="radio" id="test2" name="frequence" value="2">
+                        <label class="text-primary-emphasis" for="test2">Toutes les 2 semaines</label>
+                    </div>
+                </div>
+                <p class="text-primary-emphasis fst-italic"> En cliquant sur "S'inscrire", vous acceptez les CGU ainsi que notre politique de confidentialité décrivant la finalité des traitements de vos données personnelles. </p>
+            </form>
+        <div class="d-flex col-md-4 align-items-start">
+            <img alt="Abonnez-vous à la newsletter" title="Newsletter du blog de Nicolas" style="width:20rem" src="{{ asset('build/newsletter.png') }}">
+        </div>
+    </div>
+</div>

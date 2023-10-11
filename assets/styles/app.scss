@@ -134,7 +134,8 @@ a {
       
 @media (max-width: 1023px) {
     .articleMain {
-        flex-direction: column;
+        flex-direction: column !important;
+        height: inherit !important;
 
         #imgArticle {
             width: 330px;
@@ -145,6 +146,10 @@ a {
             margin: auto !important;
             margin-bottom: 2rem !important;
         }
+    }
+
+    #newComent {
+        width: 20rem !important;
     }
 
     .side-bar {

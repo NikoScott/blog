@@ -2,12 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Comment;
 use App\Entity\Newsletter;
-use App\Entity\User;
-use App\Form\EditProfileFormType;
-use App\Form\RegistrationFormType;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,11 +16,24 @@ class NewsLetterController extends AbstractController
     #[Route('/newsletter', name: 'app_newsletter')]
     public function index(EntityManagerInterface $entityManager, Request $request): Response
     {
-
-        return $this->render('newsletter/index.html.twig', [
-
-
-        ]);
+        if ($request->isMethod('POST')) {
+            $email = $request->request->get('newsletter');
+            $frequence = $request->request->get('frequence');
+    
+            // Valide les données et enregistre dans entité Newsletter
+            $newsletter = new Newsletter();
+            $newsletter->setEmail($email);
+            $newsletter->setFrequence($frequence);
+    
+            $entityManager->persist($newsletter);
+            $entityManager->flush();
+    
+            // Message flash de confirmation
+            $this->addFlash('confirmation', 'Votre inscription à la newsletter est faite.');
+            return $this->render('home/index.html.twig');
+        }
+    
+        return $this->render('newsletter/index.html.twig', []);
     }
+    
 }
-

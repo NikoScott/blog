@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block meta_description %}
-	Découvrez le monde fascinant de l'IA, de l'informatique et des anecdotes technologiques sur notre blog captivant.
 {% endblock %}
 
 {% block title %}Blog de Nicolas PEREIRE
@@ -9,14 +8,13 @@
 
 {% block body %}
 
+{# AFFICHE TOUTES LES CATEGORIES EN BDD #}
 	<div class="side-bar side-shadow mt-1 ps-1 pt-4">
 		<div class="list-categories">
 			<ul>
 				{% for category in listCategories %}
 					<li class="my-3">
-						<a aria-label="article par catégorie" class="text-primary-emphasis" href="{{ path('show_articles_by_category', {id : category.id}) }}">
-							{{category.name}}
-						</a>
+						<a aria-label="article par catégorie" class="text-primary-emphasis" href="{{ path('show_articles_by_category', {id : category.id}) }}"> {{category.name}}</a>
 						<div class="separator mt-3" style="height:2px;background:rgba(255,255,255, 0.05);"></div>
 					</li>
 				{% endfor %}
@@ -29,12 +27,7 @@
 
 	<div
 		class="main-content px-5">
-		{#"alert alert-success text-center		{% for notice in app.flashes('confirmation') %}
-			<div class="alert alert-success text-center mt-3" id="confirmation-message">
-				{{ notice }}
-			</div>
-		{% endfor %}
-
+		
 		{# Permet d'ajouter un article sans passer par le back office #}
 		{% if is_granted('ROLE_ADMIN') %}      
 					<a aria-label="creer un nouvel article" href="{{path('ajout_article')}}" class="btn btn-warning mb-3"> Creer un nouvel article </a>
@@ -45,13 +38,34 @@
 			Nos derniers articles
 		</h1>
 
+		{% for notice in app.flashes('confirmation') %}
+		<div class="mx-auto justify-content-center" style="width:30%">
+		{# Afficher les messages flash #}
+			<div class="alert alert-success text-center mt-3" id="confirmation-message">
+			{{ notice }}
+			</div>
+		</div>
+		{% endfor %}
+
+
 {# AFFICHE TOUS LES ARTICLES EN BDD #}
 		{% for article in listArticles %}
-			<div class="d-flex flex-column  {% if loop.index <= 3 %}first-element{% endif %} slide-from-bottom" style="width:100%;">
-				<div class="articleMain d-flex my-3 cursor-pointer ">
+			<div class="d-flex flex-column {% if loop.index <= 3 %}first-element{% endif %} slide-from-bottom" style="width:100%;">
+				<div class="articleMain d-flex flex-column flex-wrap my-3 cursor-pointer" style="height:16rem">
 					<a aria-label="article par id" class="flex-column text-decoration-none text-reset" href="{{ path('show_article_by_id', { id : article.id }) }}">
 						<img id="imgArticle" class="custom-shadow me-3" src="{{ asset('images/articles/' ~ article.picture ) }}" alt="photo-article"/>
 					</a>
+			{# ICON FOR LIKE AND SAVE #}
+					{# <div class="d-flex justify-content-end me-3">
+                        <a href="#" class="fav-icon">
+							<i class="fa-regular fa-heart fa-xl me-2" style="color: #6ea8fe;"></i>
+                        	<i class="fa-solid fa-heart fa-xl me-2" style="color: #6ea8fe;"></i>
+						</a>
+                        <a href="#" class="fav-icon">
+							<i class="fa-regular fa-bookmark fa-xl me-2" style="color: #6ea8fe;"></i>
+							<i class="fa-solid fa-bookmark fa-xl" style="color: #6ea8fe;"></i>
+						</a>
+                    </div> #}
 					<div class="text-body-secondary mb-1 fst-italic ps-2" style="font-size:12px">
 						<a aria-label="article par catégorie" href="{{ path('show_articles_by_category', { id : article.category.id}) }}">
 							{{ article.category }}
@@ -63,6 +77,7 @@
 							{# raw : interprete les balises html #}
 						</a>
 						<p id="catchPhrase" class="mb-2 fst-normal text-body-secondary" style="font-size:16px">{{ article.catchPhrase }} </p>
+
 
 						{# RESAUX SOCIAUX #}
 						{#  #}
@@ -93,13 +108,13 @@
 			<div class="separator mt-5 mb-5" style="height:2px;background:rgba(255,255,255, 0.05);"></div>
 		{% endfor %}
 
-		<div class="navigation">
+		<div class="d-flex justify-content-center">
 			{{ knp_pagination_render(listArticles) }}
 		</div>
 
 		{# NEWSLETTER  #}
 
-		{{ render(controller('App\\Controller\\NewsLetterController::index')) }}
+		{{ render(controller('App\\Controller\\NewsLetterController::index', {}, {'controller_name': 'App\\Controller\\HomeController' })) }}
 
 
 	</div>

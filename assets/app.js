@@ -17,6 +17,41 @@ import './bootstrap';
 
 // loads the jquery package from node_modules
 import $ from 'jquery';
+import { icons } from 'feather-icons';
+
+/////
+// animation icons
+// Sélectionnez tous les éléments avec la classe "fav-icon"
+const favIcons = document.querySelectorAll('.fav-icon');
+
+// Ajoutez un gestionnaire de clic à chaque élément de la liste
+favIcons.forEach((favIcon) => {
+    let isRegular = true; // Variable de suivi pour l'état actuel de l'icône
+
+    favIcon.addEventListener('click', (event) => {
+        event.preventDefault(); // Empêche le comportement par défaut du lien (naviguer vers une autre page)
+
+        // Sélectionnez l'icône à l'intérieur de l'élément clicqué
+        const icon = favIcon.querySelector('i');
+        console.log('Clic détecté'); // Ajout de cette ligne pour le débogage
+
+        // Basculez entre les classes "fa-regular" et "fa-solid" pour changer l'icône
+        if (isRegular) {
+            // icon.classList.remove('fa-regular');
+            icon.classList.add('fa-solid');
+        } else {
+            // icon.classList.remove('fa-solid');
+            icon.classList.add('fa-regular');
+        }
+
+        // Inversez l'état de la variable de suivi
+        isRegular = !isRegular;
+    });
+});
+
+      
+
+    
 
 //////
 // SLIDE

@@ -160,8 +160,7 @@ class ArticlesController extends AbstractController
     
             if($form->isSubmitted() && $form->isValid()) {
 
-                // si j'ai une categorie nouvel dans le formulaire je la set en BDD
-
+                // si j'ai une categorie nouvelle dans le formulaire je la set en BDD
                 if(!is_null($form->get('newCategory')->getData()) && !empty($form->get('newCategory')->getData())) {
 
                     $category = new Category();
@@ -173,11 +172,9 @@ class ArticlesController extends AbstractController
                 }
                 // sinon je choisis dans la liste donc dessous
 
-                
                 if($file = $article->getPosterFile()) {
                 $fileName = md5(uniqid()) . '.' . $file->guessExtension();
                 $file->move('./images/articles', $fileName);
-    
                 $article->setPicture($fileName);
                 }
     
@@ -193,6 +190,5 @@ class ArticlesController extends AbstractController
                 'add_articles_form' => $form->createView(),
                 'article' => $article,
             ]);
-    }
-    
+    } 
 }

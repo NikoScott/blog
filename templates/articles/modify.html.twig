@@ -18,7 +18,7 @@
             {{ form_row(articles_form.date) }}
             {{ form_row(articles_form.category) }}
             {{ form_row(articles_form.posterFile) }}
-            <img style="width:100px; border:2px solid black" src="{{asset('./images/articles/' ~ article.picture)}}"/>
+            <img style="width:100px; border:2px solid black" src="{{asset('images/articles/' ~ article.picture)}}"/>
             {{ form_row(articles_form.legendMainPicture) }}
             {{ form_row(articles_form.relatedSubjects) }}
             {{ form_row(articles_form.author) }}
