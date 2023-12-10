@@ -85,7 +85,7 @@ RESEAUX SOCIAUX
 
 {# SEULEMENT POUR ADMIN sans passer par le back office #}
 
-        <div class="mt-4">
+        {# <div class="mt-4">
         {% if is_granted('ROLE_ADMIN') %}
 			<a aria-label="Modifier" href="{{path('modify_article', { id : article.id} )}}" class="btn btn-warning">
 				Modifier
@@ -94,10 +94,10 @@ RESEAUX SOCIAUX
 				Supprimer
 			</a>
 		{% endif %}
-        </div>
+        </div> #}
 
 
-		<div id="description" class="mt-5" style="width:90%">
+		<div id="description" class="mt-5" style="width:80%">
 			{{article.description | raw}}
 		</div>
 
@@ -139,16 +139,34 @@ COMMENTAIRES EXISTANTS
 {# 
 NOUVEAUX COMMENTAIRES 
 #}
-			<div class="mt-5 mx-auto" style="width:80%" id="newComent">
-				{{ form_start(form_comment) }}
-					{{ form_row(form_comment.comment) }}
-					{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-					{{ form_row(form_comment.ajouter) }}
-					{% else %}
-					{{ form_row(form_comment.ajouter, {label: '<a style="color:white" href="' ~ path("app_login") ~ '">' ~ "Ajouter" ~ '</a>',label_html: true }) }}
-					{% endif %}
-				{{ form_end(form_comment) }}
-			</div>
+
+{# {{ dump(app.user) }} #}
+
+{% if app.user is not null %}
+	<div class="mt-5 mx-auto" style="width:80%" id="newComent">
+    {{ form_start(form_comment) }}
+    {{ form_row(form_comment.comment) }}
+    {{ form_row(form_comment.ajouter) }}
+    {{ form_end(form_comment) }}
+{% else %}
+    
+		<div class="mt-5 d-flex justify-content-center">
+			<a href="{{ path('app_login') }}" class="btn btn-lg btn-primary mb-2" role="button">
+            Se connecter pour commenter
+        	</a>
+		</div>
+	</div>
+{% endif %}
+
+
+
+
+
+
+
+
+
+
 
 	</div>
 

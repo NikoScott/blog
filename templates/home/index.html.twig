@@ -19,9 +19,9 @@
 					</li>
 				{% endfor %}
 			</ul>
-			{% if is_granted('ROLE_ADMIN') %}      
+			{# {% if is_granted('ROLE_ADMIN') %}      
 						<a aria-label="ajouter une catégorie" href="{{path('ajout_category')}}" class="ms-4 btn btn-warning"> Creer une nouvelle catégorie </a>
-			    		{% endif %}
+			    		{% endif %} #}
 		</div>
 	</div>
 
@@ -29,13 +29,13 @@
 		class="main-content px-5">
 		
 		{# Permet d'ajouter un article sans passer par le back office #}
-		{% if is_granted('ROLE_ADMIN') %}      
+		{# {% if is_granted('ROLE_ADMIN') %}      
 					<a aria-label="creer un nouvel article" href="{{path('ajout_article')}}" class="btn btn-warning mb-3"> Creer un nouvel article </a>
-				{% endif %}
+				{% endif %} #}
 
 
 		<h1 class="mb-3 text-primary">
-			Nos derniers articles
+			Derniers articles
 		</h1>
 
 		{% for notice in app.flashes('confirmation') %}

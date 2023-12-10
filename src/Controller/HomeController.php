@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Articles;
 use App\Entity\Category;
-
+use App\Entity\Comment;
 use App\Entity\Newsletter;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -53,7 +53,7 @@ class HomeController extends AbstractController
             $articles, /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
             4 /*limit per page*/
-    );
+        );
 
         return $this->render('home/index.html.twig', [
             'listArticles' => $articles, // je passe des parametres à ma vue
